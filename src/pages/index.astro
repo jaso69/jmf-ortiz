@@ -6,7 +6,6 @@ import Features from '@components/sections/Features.astro';
 import Stats from '@components/sections/Stats.astro';
 import { featureLists } from '@data/features';
 import { statsLists } from '@data/stats';
-import { logoLists } from '@data/_logos';
 import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
 import heroImage from '../assets/images/home/hero.webp';
@@ -40,7 +39,7 @@ const featuresSection = {
     description: "Somos una empresa especializada en la administración y mantenimiento integral de comunidades. Con nuestra experiencia en el sector, nos esforzamos por ofrecer un servicio de alta calidad y un enfoque en la gestión de fincas.",
     features: featureLists.main.features,
     button: {
-        text: "Resuelve tus dudas con nuestro agente virtual",
+        text: "Resuelve tus dudas con nuestro agente",
         link: "/chat",
         variant: "primary" as const
     }
@@ -98,9 +97,7 @@ const faqsSection = {
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="base" background="dark" />
-    <!-- <RecentPosts content={recentPostsSection} background="dark" padding="base" postsToShow={3} category="Theme Usage"/> -->
     <SplitPanel content={styleGuideSection} imagePosition="right" background="dark" padding="base" />
-    <!-- <CtaBanner content={mainCta} variant="contained" background="dark" paddingBottom="base" /> -->
     <Stats content={sideBySideStats} background='dark' padding="base"/>
     <Faqs content={faqsSection} background="dark" padding="base" />
 </Layout>
