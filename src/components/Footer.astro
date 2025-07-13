@@ -22,11 +22,11 @@ interface Props {
 const { footerCta } = Astro.props;
 
 const defaultCta = {
-  title: "Ready to get started?",
-  description: "Join us today and transform your digital presence with our innovative solutions.",
+  title: "Contacto con la administración de fincas",
+  description: "Ponemos a tu disposición un teléfono con centralita para que ninguna llamada se pierda, un formulario de contacto para atender tus consultas y un asistente virtual disponible las 24 horas.",
   hideCta: false,
   button: {
-    text: "Contact Us",
+    text: "Contacto",
     link: "/contact",
     target: "_self"
   }
@@ -44,8 +44,8 @@ const currentYear = new Date().getFullYear();
         <p class="text-white mb-6 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
           {cta.description}
         </p>
-        <Button 
-          href={cta.button.link} 
+        <Button
+          href={cta.button.link}
           variant="ghostLight"
           size="lg"
           data-aos="fade-up"
@@ -57,16 +57,22 @@ const currentYear = new Date().getFullYear();
       </div>
     )}
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-background-light">
-      <div class="col-span-1">
-        <Logo variant="footer" />
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-8 border-b border-background-light">
+      <div class="col-span-2">
+        Adminitración de Fincas JMF Ortiz
         <p class="mt-4 text-white">
-          Empowering your digital journey with innovative solutions.
+          Telefono: 91 656 55 12
+        </p>
+        <p class="mt-4 text-white">
+          Correo: info@jmfortiz.com
+        </p>
+        <p class="mt-4 text-white">
+          C/ Hilados, número 20, Esc Izq Bajo B, 28850 Torrejón de Ardoz.
         </p>
       </div>
-      
+
       <div class="col-span-1">
-        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <h3 class="text-lg font-semibold mb-4">Enlaces Rápidos</h3>
         <nav>
           <ul class="space-y-2">
             {footerMenu.map(item => (
@@ -79,15 +85,15 @@ const currentYear = new Date().getFullYear();
 
     <div class="mt-8 flex flex-col md:flex-row justify-between items-center">
       <div class="text-body-dark text-sm">
-        © {currentYear} {siteConfig.companyName}. All rights reserved.
+        © {currentYear} {siteConfig.companyName}. Todos los derechos reservados.
       </div>
-      
+
       <nav class="mt-4 md:mt-0">
         <ul class="flex flex-wrap gap-6">
           {legalMenu.map(item => (
             <li>
-              <a 
-                href={item.link} 
+              <a
+                href={item.link}
                 class="text-sm text-body-dark hover:text-white transition-colors"
               >
                 {item.name}

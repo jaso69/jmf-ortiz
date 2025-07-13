@@ -1,25 +1,28 @@
 export const siteConfig = {
-  companyName: 'Titan Core',
-  siteUrl: 'https://titan-core.com',
+  companyName: 'Administración de Fincas JMF Ortiz',
+  siteUrl: 'https://jmfortiz.com',
   Socials: {
-      xSocial: 'https://x.com/astrodotbuild',
-      Github: 'https://github.com/withastro',
-      Instagram: 'https://www.instagram.com/astrodotbuild',
-      LinkedIn: 'https://www.linkedin.com/company/astrodotbuild',
-      Email: 'support@titan-core.com',
-      Phone: '+123 456 7890',
-      Location: '123 Main St, Anytown, USA',
+      xSocial: '',
+      Github: '',
+      Instagram: '',
+      LinkedIn: '',
+      Email: 'info@jmfortiz.com',
+      Phone: '91 656 55 12 ',
+      Location: 'C/ Hilados, número 20, Esc Izq Bajo B, 28850 Torrejón de Ardoz, Madrid, España',
   }
 };
-
+//Claro, aquí tienes los datos de contacto de JMF Ortiz: Dirección: C/ Hilados, número 20, escalera izquierda Bajo B, 28850 Madrid, España. Teléfono: +34 91 656 55 12.
 export const SEO = {
   Separator: '|',
-  SiteName: 'Titan Core',
-  defaultDescription: 'A modern, high-performance Astro JS theme',
+  SiteName: 'JMF Ortiz',
+  defaultDescription: 'Administración de Fincas JMF Ortiz',
+  defaultKeywords: 'Administración de Fincas JMF Ortiz',
+  defaultTitle: 'Administración de Fincas JMF Ortiz',
+  defaultImage: 'https://jmfortiz.com/assets/images/home/hero.webp',
 };
-  
+
 export const blogSetting = {
-  postsPerPage: 6   
+  postsPerPage: 6
 }
 
 export const themeSetting = {

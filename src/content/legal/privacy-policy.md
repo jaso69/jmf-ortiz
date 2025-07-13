@@ -1,84 +1,76 @@
 ---
-title: "Privacy Policy"
+title: "Política de Privacidad"
 lastUpdated: "2024-03-04"
 seo:
-  title: "Privacy Policy - Your Rights and Our Responsibilities"
-  description: "Learn how we collect, use, and protect your personal information in compliance with data protection regulations."
+  title: "Política de Privacidad - Sus Derechos y Nuestras Responsabilidades"
+  description: "Conozca cómo recopilamos, usamos y protegemos su información personal en cumplimiento con las normativas de protección de datos."
 ---
+## Introducción
 
-## Introduction
+Bienvenido a nuestra Política de Privacidad. Este documento explica cómo recopilamos, usamos y protegemos su información personal cuando utiliza nuestro sitio web y servicios.
 
-Welcome to our Privacy Policy. This document explains how we collect, use, and protect your personal information when you use our website and services.
+## Información que Recopilamos
 
-## Information We Collect
+### Información Personal
 
-### Personal Information
+Podemos recopilar los siguientes tipos de información personal:
 
-We may collect the following types of personal information:
+- **Información de Contacto**: Nombre, dirección de correo electrónico, número de teléfono y dirección postal.
+- **Información Técnica**: Dirección IP, tipo de navegador, información del dispositivo y cookies.
+- **Información de Uso**: Páginas visitadas, tiempo invertido en el sitio e interacción con el contenido.
 
-- **Contact Information**: Name, email address, phone number, and mailing address.
-- **Account Information**: Username, password, and account preferences.
-- **Technical Information**: IP address, browser type, device information, and cookies.
-- **Usage Information**: Pages visited, time spent on site, and interaction with content.
+### Cómo Recopilamos la Información
 
-### How We Collect Information
+La información se recopila a través de:
 
-Information is collected through:
+- Envíos directos mediante formularios.
+- Cookies y tecnologías de seguimiento.
+- Servicios y análisis de terceros.
 
-- Direct submission via forms
-- Cookies and tracking technologies
-- Third-party services and analytics
+## Cómo Usamos Su Información
 
-## How We Use Your Information
+Utilizamos su información para:
 
-We use your information to:
+- Proporcionar y mejorar nuestros servicios.
+- Procesar transacciones y cumplir con pedidos.
+- Personalizar su experiencia.
+- Cumplir con obligaciones legales.
 
-- Provide and improve our services
-- Communicate with you about our products and services
-- Process transactions and fulfill orders
-- Personalize your experience
-- Comply with legal obligations
+## Compartir y Divulgar Datos
 
-## Data Sharing and Disclosure
+Podemos compartir su información con:
 
-We may share your information with:
+- Proveedores de servicios que nos ayudan a operar nuestro negocio.
+- Autoridades legales cuando lo exija la ley.
 
-- Service providers who help us operate our business
-- Legal authorities when required by law
-- Business partners with your consent
+No vendemos su información personal a terceros.
 
-We do not sell your personal information to third parties.
+## Sus Derechos
 
-## Your Rights
+Dependiendo de su ubicación, puede tener derecho a:
 
-Depending on your location, you may have the right to:
+- Acceder a su información personal.
+- Corregir información inexacta.
+- Eliminar su información.
+- Oponerse a ciertas actividades de procesamiento.
+- Portabilidad de datos.
+- Retirar el consentimiento.
 
-- Access your personal information
-- Correct inaccurate information
-- Delete your information
-- Object to certain processing activities
-- Data portability
-- Withdraw consent
+## Seguridad de los Datos
 
-## Data Security
+Implementamos medidas técnicas y organizativas adecuadas para proteger su información personal contra accesos no autorizados, divulgación, alteración o destrucción.
 
-We implement appropriate technical and organizational measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction.
+## Cookies y Tecnologías de Seguimiento
 
-## Cookies and Tracking Technologies
+Nuestro sitio web utiliza cookies y tecnologías similares para mejorar su experiencia de navegación. Puede gestionar sus preferencias de cookies a través de la configuración de su navegador.
 
-Our website uses cookies and similar technologies to enhance your browsing experience. You can manage your cookie preferences through your browser settings.
+## Cambios en Esta Política de Privacidad
 
-## Children's Privacy
+Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificaremos sobre cualquier cambio significativo publicando la nueva Política de Privacidad en esta página y actualizando la fecha de "Última actualización".
 
-Our services are not intended for children under 13. We do not knowingly collect information from children under 13.
+## Contáctenos
 
-## Changes to This Privacy Policy
+Si tiene alguna pregunta sobre esta Política de Privacidad, por favor contáctenos en:
 
-We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
-
-## Contact Us
-
-If you have any questions about this Privacy Policy, please contact us at:
-
-- Email: privacy@example.com
-- Address: 123 Privacy Street, Data City, 12345 
+- **Correo electrónico:** info@jmfortiz.com
+- **Dirección:** C/ Hilados, número 20, Esc Izq Bajo B, 28850 Torrejón de Ardoz, Madrid, España

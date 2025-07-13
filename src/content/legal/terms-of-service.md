@@ -1,74 +1,58 @@
 ---
-title: "Terms of Service"
+title: "Términos de Servicio"
 lastUpdated: "2024-03-04"
+
 seo:
-  title: "Terms of Service - Rules for Using Our Platform"
-  description: "Our terms of service outline the rules, guidelines, and legal agreements between you and our company."
+  title: "Términos de Servicio - Reglas para Usar Nuestra Plataforma"
+  description: " Nuestros términos de servicio establecen las reglas, directrices y acuerdos legales entre usted y nuestra empresa."
 ---
+# Términos de Servicio
 
-## Introduction
+## Introducción
 
-Welcome to our Terms of Service. These terms govern your use of our website and services. By accessing or using our services, you agree to be bound by these terms.
+Bienvenido a nuestros Términos de Servicio. Estos términos rigen el uso de nuestro sitio web y servicios. Al acceder o utilizar nuestros servicios, usted acepta estar sujeto a estos términos.
 
-## Definitions
+## Definiciones
 
-- **"Company"**, **"we"**, **"us"**, or **"our"** refers to [Your Company Name].
-- **"Services"** refers to the website, applications, and other offerings provided by the Company.
-- **"User"**, **"you"**, or **"your"** refers to the individual or entity using our Services.
-- **"Content"** refers to text, images, videos, audio, and other materials that may appear on our Services.
+- **"Empresa"**, **"nosotros"**, **"nos"** o **"nuestro"** se refiere a [Nombre de su Empresa].
+- **"Servicios"** se refiere al sitio web, aplicaciones y otras ofertas proporcionadas por la Empresa.
+- **"Usuario"**, **"usted"** o **"su"** se refiere al individuo o entidad que utiliza nuestros Servicios.
+- **"Contenido"** se refiere a textos, imágenes, videos, audios y otros materiales que puedan aparecer en nuestros Servicios.
 
-## Account Registration
+## Propiedad Intelectual
 
-When you create an account with us, you must provide accurate and complete information. You are responsible for maintaining the security of your account and password. The Company cannot and will not be liable for any loss or damage from your failure to comply with this security obligation.
+### Nuestro Contenido
 
-## Acceptable Use
+Los Servicios y todo el contenido y materiales disponibles a través de los Servicios son propiedad de la Empresa o de sus licenciantes y están protegidos por leyes de derechos de autor, marcas registradas y otras leyes de propiedad intelectual.
 
-You agree not to use the Services to:
+## Terminación
 
-- Violate any applicable laws or regulations
-- Infringe upon the rights of others
-- Distribute malware or other harmful code
-- Interfere with or disrupt the Services
-- Engage in unauthorized data collection
-- Send unsolicited communications
+Podemos terminar o suspender su cuenta y acceso a los Servicios a nuestra sola discreción, sin previo aviso, por conductas que consideremos que violan estos Términos, son perjudiciales para otros usuarios, nosotros o terceros, o por cualquier otra razón.
 
-## Intellectual Property
+## Exención de Garantías
 
-### Our Content
+LOS SERVICIOS SE PROPORCIONAN "TAL CUAL" Y "SEGÚN DISPONIBILIDAD" SIN GARANTÍAS DE NINGÚN TIPO, YA SEAN EXPRESAS O IMPLÍCITAS, INCLUYENDO, ENTRE OTRAS, LAS GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR O NO INFRACCIÓN.
 
-The Services and all content and materials available through the Services are the property of the Company or its licensors and are protected by copyright, trademark, and other intellectual property laws.
+## Limitación de Responsabilidad
 
-### Your Content
+EN NINGÚN CASO LA EMPRESA SERÁ RESPONSABLE POR DAÑOS INDIRECTOS, INCIDENTALES, ESPECIALES, CONSECUENTES O PUNITIVOS, INCLUYENDO, SIN LIMITACIÓN, PÉRDIDA DE BENEFICIOS, DATOS, USO, FONDO DE COMERCIO U OTRAS PÉRDIDAS INTANGIBLES, DERIVADAS DE SU ACCESO O USO DE LOS SERVICIOS O DE LA IMPOSIBILIDAD DE ACCEDER O USARLOS.
 
-You retain ownership of any content you submit, post, or display on or through the Services. By submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute your content.
+## Indemnización
 
-## Termination
+Usted acepta indemnizar, defender y eximir de responsabilidad a la Empresa, sus directivos, empleados, agentes y afiliados de cualquier reclamación, responsabilidad, daños, pérdidas, costos, gastos o honorarios (incluidos honorarios razonables de abogados) que dichas partes puedan incurrir como resultado de o derivados de su violación de estos Términos.
 
-We may terminate or suspend your account and access to the Services at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason.
+## Cambios en los Términos
 
-## Disclaimer of Warranties
+Nos reservamos el derecho de modificar estos Términos en cualquier momento. Si realizamos cambios, proporcionaremos notificación publicando los Términos actualizados en esta página y actualizando la fecha de "Última actualización". Su uso continuo de los Servicios después de dichos cambios constituye su aceptación de los nuevos Términos.
 
-THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+## Ley Aplicable
 
-## Limitation of Liability
+Estos Términos se regirán e interpretarán de acuerdo con las leyes de España, sin tener en cuenta sus disposiciones sobre conflicto de leyes.
 
-IN NO EVENT SHALL THE COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICES.
+## Contáctenos
 
-## Indemnification
+Si tiene alguna pregunta sobre estos Términos, por favor contáctenos en:
 
-You agree to indemnify, defend, and hold harmless the Company and its officers, directors, employees, agents, and affiliates from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) that such parties may incur as a result of or arising from your violation of these Terms.
+- **Correo electrónico:** info@jmfortiz.com
+- **Dirección:** C/ Hilados, número 20, Esc Izq Bajo B, 28850 Torrejón de Ardoz, Madrid, España
 
-## Changes to Terms
-
-We reserve the right to modify these Terms at any time. If we make changes, we will provide notice by posting the updated Terms on this page and updating the "Last Updated" date. Your continued use of the Services after any such changes constitutes your acceptance of the new Terms.
-
-## Governing Law
-
-These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
-
-## Contact Us
-
-If you have any questions about these Terms, please contact us at:
-
-- Email: legal@example.com
-- Address: 123 Legal Avenue, Terms City, 12345 

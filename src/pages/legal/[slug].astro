@@ -27,8 +27,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
 // Hero content
 const heroContent = {
-    title: entry.data.title,
-    description: '',
+    title: 'Información Legal',
+    description: 'Información legal de JMF Ortiz',
     overlayOpacity: 0.8,
 };
 ---
@@ -38,7 +38,7 @@ const heroContent = {
 
     <article class="site-container--small mx-auto px-8 prose pb-base">
         <div class="mt-12 mb-8">
-            <p class="text-sm text-body-base/80">Last updated: {formattedDate}</p>
+            <p class="text-sm text-body-base/80">Ultima actualización: {formattedDate}</p>
         </div>
 
         <Content />

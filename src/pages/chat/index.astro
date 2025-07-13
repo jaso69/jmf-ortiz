@@ -1,0 +1,18 @@
+---
+import Layout from '@layouts/Layout.astro';
+import InnerHero from '@components/sections/InnerHero.astro';
+import Chatia from '@components/Chatia.astro';
+
+const seoTitle = "Asistente virtual | JMF Ortiz";
+const seoDescription = "Asistente virtual de la administración de fincas en Torrejón de Ardoz con más de 40 años de experiencia. Presupuesto gratuito y sin compromiso.";
+
+const heroContent = {
+    title: "Asistente virtual",
+    description: "JMF Ortiz",
+}
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+     <InnerHero content={heroContent}  />
+    <Chatia />
+</Layout>

@@ -13,24 +13,24 @@ export const faqLists: Record<string, FaqList> = {
         id: 'main',
         faqs: [
             {
-                question: "Is Titan Core completely free to use?",
-                answer: "Yes, Titan Core is 100% free and open-source. You can use it for personal and commercial projects without any licensing fees."
+                question: "¿Qué servicios incluye la administración de fincas?",
+                answer: "Nuestros servicios incluyen la contabilidad completa de la comunidad, gestión de cobros y pagos, organización de juntas, mantenimiento de instalaciones, contratación de proveedores, atención a incidencias y asesoramiento legal básico."
             },
             {
-                question: "How do I customize the color schemes?",
-                answer: "Titan Core comes with 10 pre-built color schemes that can be easily switched through the theme configuration file. For custom colors, you can modify the CSS variables in the `src/styles/global.css` file to match your brand identity."
+                question: "¿Qué nos diferencia de otras administraciones?",
+                answer: "Contamos con más de 40 años de experiencia en la gestión de comunidades, ofreciendo un trato cercano, gestión transparente y soluciones efectivas. Nos adelantamos a los problemas y trabajamos con herramientas digitales que facilitan la comunicación con los propietarios."
             },
             {
-                question: "Do I need to know Astro JS to use this theme?",
-                answer: "Basic familiarity with Astro JS is helpful, but not required. The component-based architecture makes it easy to understand and modify even if you're new to Astro."
+                question: "¿Qué coste tiene contratar a un administrador de fincas?",
+                answer: "El coste depende del tamaño de la comunidad, número de vecinos y servicios contratados. Ofrecemos presupuestos personalizados, gratuitos y sin compromiso. Siempre ajustados a las necesidades reales de cada comunidad."
             },
             {
-                question: "Can I use Titan Core as a starting point for client projects?",
-                answer: "Absolutely! Titan Core is designed to be a foundation theme that you can build upon for client projects. Its clean architecture and minimal approach make it perfect as a starting point for customized websites."
+                question: "¿Cómo se puede contactar con el administrador ante una urgencia?",
+                answer: "Disponemos de canales de atención urgentes por teléfono y correo electrónico. Además, algunas comunidades tienen acceso a un área privada online donde pueden reportar incidencias las 24 horas."
             },
             {
-                question: "How often is Titan Core updated?",
-                answer: "We aim to update Titan Core regularly to keep it compatible with the latest Astro JS releases and web standards. Major updates are released quarterly, with smaller fixes and improvements added more frequently. You can star our GitHub repository to stay informed about updates."
+                question: "¿Pueden encargarse del mantenimiento técnico del edificio?",
+                answer: "Sí, coordinamos y supervisamos el mantenimiento preventivo y correctivo de instalaciones comunes: ascensores, sistemas eléctricos, fontanería, limpieza, etc. Trabajamos con proveedores de confianza y controlamos la calidad del servicio prestado."
             }
         ]
     }

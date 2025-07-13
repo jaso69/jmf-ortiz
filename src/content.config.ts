@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { categories } from '@data/categories';
+import { categories } from '@data/_categories';
 
 // Extract category names for the enum
 const categoryNames = categories.map((category) => category.name);

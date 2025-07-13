@@ -2,5 +2,3 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://titan-core.com/sitemap-index.xml 
