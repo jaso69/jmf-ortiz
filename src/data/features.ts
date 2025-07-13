@@ -57,7 +57,7 @@ export const featureLists: Record<string, FeatureList> = {
             {
                 icon: Home,
                 title: 'Comprometidos con tu Comunidad',
-                description: 'Mejoramos la calidad de vida en su comunidad mediante una administración personalizada y eficaz, adaptada a sus necesidades gracias a nuestra experiencia'
+                description: 'Mejoramos la calidad de vida en su comunidad mediante una administración personalizada y eficaz, adaptada a sus necesidades gracias a 45 años de experiencia'
             },
             {
                 icon: Users,
