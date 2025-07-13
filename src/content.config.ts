@@ -1,9 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { categories } from '@data/_categories';
+//import { categories } from '@data/_categories';
 
 // Extract category names for the enum
-const categoryNames = categories.map((category) => category.name);
+//const categoryNames = categories.map((category) => category.name);
 
 const blog = defineCollection({
     loader: glob({ base: './src/content/blog', pattern: '**/*.md' }),
@@ -14,7 +14,7 @@ const blog = defineCollection({
             featuredImage: image().optional(),
             publishDate: z.string().transform((str) => new Date(str)),
             publish: z.boolean().optional(),
-            categories: z.array(z.enum(categoryNames as [string, ...string[]])),
+            //categories: z.array(z.enum(categoryNames as [string, ...string[]])),
             seo: z
                 .object({
                     title: z.string().optional(),
