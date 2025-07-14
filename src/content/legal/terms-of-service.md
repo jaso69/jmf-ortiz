@@ -6,6 +6,8 @@ seo:
   title: "Términos de Servicio - Reglas para Usar Nuestra Plataforma"
   description: " Nuestros términos de servicio establecen las reglas, directrices y acuerdos legales entre usted y nuestra empresa."
 ---
+<span class="text-white">
+
 # Términos de Servicio
 
 ## Introducción
@@ -56,3 +58,4 @@ Si tiene alguna pregunta sobre estos Términos, por favor contáctenos en:
 - **Correo electrónico:** info@jmfortiz.com
 - **Dirección:** C/ Hilados, número 20, Esc Izq Bajo B, 28850 Torrejón de Ardoz, Madrid, España
 
+</span>

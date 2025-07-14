@@ -5,6 +5,8 @@ seo:
   title: "Política de Privacidad - Sus Derechos y Nuestras Responsabilidades"
   description: "Conozca cómo recopilamos, usamos y protegemos su información personal en cumplimiento con las normativas de protección de datos."
 ---
+<span class="text-white">
+
 ## Introducción
 
 Bienvenido a nuestra Política de Privacidad. Este documento explica cómo recopilamos, usamos y protegemos su información personal cuando utiliza nuestro sitio web y servicios.
@@ -74,3 +76,4 @@ Si tiene alguna pregunta sobre esta Política de Privacidad, por favor contácte
 
 - **Correo electrónico:** info@jmfortiz.com
 - **Dirección:** C/ Hilados, número 20, Esc Izq Bajo B, 28850 Torrejón de Ardoz, Madrid, España
+</span>
