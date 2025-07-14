@@ -14,7 +14,7 @@ Bienvenido a nuestros Términos de Servicio. Estos términos rigen el uso de nue
 
 ## Definiciones
 
-- **"Empresa"**, **"nosotros"**, **"nos"** o **"nuestro"** se refiere a [Nombre de su Empresa].
+- **"Empresa"**, **"nosotros"**, **"nos"** o **"nuestro"** se refiere a JMF Ortiz S.L.
 - **"Servicios"** se refiere al sitio web, aplicaciones y otras ofertas proporcionadas por la Empresa.
 - **"Usuario"**, **"usted"** o **"su"** se refiere al individuo o entidad que utiliza nuestros Servicios.
 - **"Contenido"** se refiere a textos, imágenes, videos, audios y otros materiales que puedan aparecer en nuestros Servicios.
