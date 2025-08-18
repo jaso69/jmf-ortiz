@@ -1,4 +1,4 @@
 # Allow all web crawlers
 User-agent: *
 Allow: /
-
+Sitemap: https://www.jmfortiz.com/sitemap.xml

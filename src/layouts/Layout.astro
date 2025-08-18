@@ -45,7 +45,7 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="sitemap" href="/sitemap.xml" />
 		<link rel="canonical" href="https://www.jmfortiz.com/" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
@@ -60,7 +60,6 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={pageDescription} />
 		{pageImage && <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
-
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content="https://www.jmfortiz.com/" />
