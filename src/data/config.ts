@@ -1,6 +1,6 @@
 export const siteConfig = {
   companyName: 'Administración de Fincas JMF Ortiz',
-  siteUrl: 'https://jmfortiz.com',
+  siteUrl: 'https://www.jmfortiz.com',
   Socials: {
       xSocial: '',
       Github: '',
@@ -18,7 +18,7 @@ export const SEO = {
   defaultDescription: 'Administración de Fincas JMF Ortiz',
   defaultKeywords: 'Administración de Fincas JMF Ortiz',
   defaultTitle: 'Administración de Fincas JMF Ortiz',
-  defaultImage: 'https://jmfortiz.com/assets/images/home/hero.webp',
+  defaultImage: 'https://www.jmfortiz.com/assets/images/home/hero.webp',
 };
 
 export const blogSetting = {
