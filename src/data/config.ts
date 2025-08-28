@@ -6,7 +6,7 @@ export const siteConfig = {
       Github: '',
       Instagram: '',
       LinkedIn: '',
-      Email: 'info@jmfortiz.com',
+      Email: 'yolanda@jmfortiz.com',
       Phone: '91 656 55 12 ',
       Location: 'C/ Hilados, número 20, Esc Izq Bajo B, 28850 Torrejón de Ardoz, Madrid, España',
   }
