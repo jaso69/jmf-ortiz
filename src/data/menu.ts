@@ -3,7 +3,7 @@
 export const headerMenu = [
     { name: 'Inicio', link: '/' },
     { name: 'Servicios', link: '/services' },
-    { name: 'Asistente', link: '/chat' },
+    { name: 'Administrador Virtual', link: '/chat' },
 ];
 
 export const footerMenu = [
