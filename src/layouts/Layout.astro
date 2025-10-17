@@ -66,7 +66,7 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 		<meta property="twitter:title" content={pageTitle} />
 		<meta property="twitter:description" content={pageDescription} />
 		{pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
-	</head>
+    </head>
 	<body data-theme={theme} class="bg-background-dark">
 		<Header />
 		<slot />

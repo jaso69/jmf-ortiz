@@ -1,7 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import InnerHero from '@components/sections/InnerHero.astro';
-import Chatia from '@components/Chatia.astro';
+//import Chatia from '@components/Chatia.astro';
 
 const seoTitle = "Administrador virtual | JMF Ortiz";
 const seoDescription = "Administrador virtual de la administración de fincas en Torrejón de Ardoz con más de 40 años de experiencia. Presupuesto gratuito y sin compromiso.";
@@ -10,9 +10,57 @@ const heroContent = {
     title: "Administrador Virtual",
     description: "JMF Ortiz",
 }
+export const prerender = false;
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
      <InnerHero content={heroContent}  />
-    <Chatia />
+    <div    id="n8n-chat"
+            class="max-w-4xl mx-auto bg-background-dark rounded-xl shadow-lg overflow-hidden py-6 px-2 mt-10 mb-0 sm:h-2/3">
+    </div>
 </Layout>
+
+<script>
+    import '@n8n/chat/style.css';
+    import { createChat } from '@n8n/chat';
+
+    // Bloquear TODOS los métodos de scroll antes de cargar el chat
+    window.scrollTo = function() { return; };
+    window.scroll = function() { return; };
+    window.scrollBy = function() { return; };
+    Element.prototype.scrollTo = function() { return; };
+    Element.prototype.scroll = function() { return; };
+    Element.prototype.scrollBy = function() { return; };
+    Element.prototype.scrollIntoView = function() { return; };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        createChat({
+            webhookUrl: 'https://primary-production-b2d99.up.railway.app/webhook/b50c3709-d2a6-4e0f-8bb9-72ba69e56438/chat',
+            target: '#n8n-chat',
+            initialMessages: ['Administrador virtual JMF Ortiz a tu servicio.'],
+            mode: 'fullscreen',
+            i18n: {
+                en: {
+                    title: 'Administrador virtual JMF Ortiz',
+                    subtitle: "",
+                    footer: '',
+                    getStarted: 'New Conversation',
+                    inputPlaceholder: 'Escribe tu consulta..',
+                },
+            },
+        });
+    });
+
+    // Solo permitir scroll con rueda del ratón
+    let allowScroll = false;
+    window.addEventListener('wheel', () => { allowScroll = true; });
+    window.addEventListener('touchmove', () => { allowScroll = true; });
+
+    // Interceptar scroll y solo permitirlo si el usuario lo inició
+    window.addEventListener('scroll', () => {
+        if (!allowScroll && window.pageYOffset !== 0) {
+            window.scrollTo(0, 0);
+        }
+        allowScroll = false;
+    });
+</script>
