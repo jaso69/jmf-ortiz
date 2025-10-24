@@ -104,22 +104,45 @@ const formBackground = 'light';
     import '@n8n/chat/style.css';
     import { createChat } from '@n8n/chat';
 
-    createChat({
-        webhookUrl: 'https://jmfortiz.jasodev.es/webhook/b50c3709-d2a6-4e0f-8bb9-72ba69e56438/chat',
-        initialMessages: [
-		'En que te puedo ayudar?.'
-	],
-    mode: 'fullscreen',
-    i18n: {
-        //@ts-ignore
-		en: {
-			title: '',
-			subtitle: "Escribime y yo envio tu consulta al agente adecuado",
-			footer: '',
-			getStarted: 'New Conversation',
-			inputPlaceholder: 'Escribe tu consulta aquí...',
-		},
-	},
+    // Bloquear TODOS los métodos de scroll antes de cargar el chat
+    window.scrollTo = function() { return; };
+    window.scroll = function() { return; };
+    window.scrollBy = function() { return; };
+    Element.prototype.scrollTo = function() { return; };
+    Element.prototype.scroll = function() { return; };
+    Element.prototype.scrollBy = function() { return; };
+    Element.prototype.scrollIntoView = function() { return; };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        createChat({
+            webhookUrl: 'https://jmfortiz.jasodev.es/webhook/b50c3709-d2a6-4e0f-8bb9-72ba69e56438/chat',
+            target: '#n8n-chat',
+            initialMessages: ['Administrador virtual JMF Ortiz a tu servicio.'],
+            mode: 'fullscreen',
+            i18n: {
+                //@ts-ignore
+                en: {
+                    title: '',
+                    subtitle: "Administrador virtual JMF Ortiz",
+                    footer: '',
+                    getStarted: 'New Conversation',
+                    inputPlaceholder: 'Escribe tu consulta..',
+                },
+            },
+        });
+    });
+
+    // Solo permitir scroll con rueda del ratón
+    let allowScroll = false;
+    window.addEventListener('wheel', () => { allowScroll = true; });
+    window.addEventListener('touchmove', () => { allowScroll = true; });
+
+    // Interceptar scroll y solo permitirlo si el usuario lo inició
+    window.addEventListener('scroll', () => {
+        if (!allowScroll && window.pageYOffset !== 0) {
+            window.scrollTo(0, 0);
+        }
+        allowScroll = false;
     });
 </script>
 
