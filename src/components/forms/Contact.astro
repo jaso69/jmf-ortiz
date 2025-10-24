@@ -21,10 +21,7 @@ const interestOptions = [
 
 const formBackground = 'light';
 ---
-<div
-    id="n8n-chat"
-    class="h-dvh space-y-6 bg-white p-6 rounded-lg">
-</div>
+
 <!-- <form id="contact-form" class="space-y-6 bg-white p-6 rounded-lg">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
@@ -99,7 +96,10 @@ const formBackground = 'light';
 </form>
 
 <p id="status-message" class="mt-4 text-xl"></p> -->
-
+<div
+    id="n8n-chat"
+    class="h-[600px] space-y-6 bg-white p-6 rounded-lg">
+</div>
 <script>
     import '@n8n/chat/style.css';
     import { createChat } from '@n8n/chat';
@@ -123,7 +123,7 @@ const formBackground = 'light';
                 //@ts-ignore
                 en: {
                     title: '',
-                    subtitle: "En qué puedo ayudarte y yo enviaré tu consulta al equipo adecuado.",
+                    subtitle: "Cuentame, Yo enviaré tu consulta al equipo adecuado.",
                     footer: '',
                     getStarted: 'New Conversation',
                     inputPlaceholder: 'Escribe tu consulta..',
