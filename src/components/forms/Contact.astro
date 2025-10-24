@@ -21,7 +21,11 @@ const interestOptions = [
 
 const formBackground = 'light';
 ---
-<form id="contact-form" class="space-y-6 bg-white p-6 rounded-lg">
+<div
+    id="n8n-chat"
+    class="h-dvh space-y-6 bg-white p-6 rounded-lg">
+</div>
+<!-- <form id="contact-form" class="space-y-6 bg-white p-6 rounded-lg">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
             label="Nombre"
@@ -94,81 +98,104 @@ const formBackground = 'light';
     </div>
 </form>
 
-<p id="status-message" class="mt-4 text-sm"></p>
+<p id="status-message" class="mt-4 text-xl"></p> -->
 
 <script>
-    const form = document.getElementById('contact-form');
-    const statusMessage = document.getElementById('status-message');
+    import '@n8n/chat/style.css';
+    import { createChat } from '@n8n/chat';
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        statusMessage.textContent = '';
-        statusMessage.style.color = 'red';
-
-        const formData = new FormData(form);
-
-        // Validación básica
-        const name = formData.get('name')?.trim();
-        const email = formData.get('email')?.trim();
-        const termsAccepted = formData.get('terms');
-
-        if (!name) {
-            statusMessage.textContent = 'Por favor, ingresa tu nombre.';
-            return;
-        }
-        if (!email) {
-            statusMessage.textContent = 'Por favor, ingresa tu correo electrónico.';
-            return;
-        }
-        if (!termsAccepted) {
-            statusMessage.textContent = 'Debes aceptar los términos y condiciones.';
-            return;
-        }
-
-        statusMessage.textContent = 'Enviando...';
-        statusMessage.style.color = 'black';
-
-        // Convertir a objeto, gestionando radios y checkboxes
-        const data = {};
-        for (const [key, value] of formData.entries()) {
-            if (data[key]) {
-                if (!Array.isArray(data[key])) {
-                    data[key] = [data[key]];
-                }
-                data[key].push(value);
-            } else {
-                data[key] = value;
-            }
-        }
-
-        try {
-            const response = await fetch('https://jmf-email.vercel.app/api/index.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    nombre: data.name,
-                    email: data.email,
-                    telefono: data.phone,
-                    empresa: data.company || '',
-                    motivo: data['hear-about'] || '',
-                    intereses: data.interests ? (Array.isArray(data.interests) ? data.interests.join(', ') : data.interests) : '',
-                    descripcion: data.message,
-                }),
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(result.error || 'Error al enviar el mensaje');
-            }
-
-            statusMessage.textContent = '¡Mensaje enviado con éxito!';
-            statusMessage.style.color = 'green';
-            form.reset();
-        } catch (error) {
-            statusMessage.textContent = error.message;
-            statusMessage.style.color = 'red';
-        }
+    createChat({
+        webhookUrl: 'https://primary-production-b2d99.up.railway.app/webhook/b50c3709-d2a6-4e0f-8bb9-72ba69e56438/chat',
+        initialMessages: [
+		'En que te puedo ayudar?.'
+	],
+    mode: 'fullscreen',
+    i18n: {
+        //@ts-ignore
+		en: {
+			title: '',
+			subtitle: "Escribime y yo envio tu consulta al agente adecuado",
+			footer: '',
+			getStarted: 'New Conversation',
+			inputPlaceholder: 'Escribe tu consulta aquí...',
+		},
+	},
     });
+</script>
+
+<script>
+    // const form = document.getElementById('contact-form') as HTMLFormElement;
+    // const statusMessage = document.getElementById('status-message') as HTMLParagraphElement;
+
+    // form.addEventListener('submit', async (e) => {
+    //     e.preventDefault();
+    //     statusMessage.textContent = '';
+    //     statusMessage.style.color = 'red';
+
+    //     const formData = new FormData(form);
+
+    //     // Validación básica
+    //     const name = formData.get('name')?.trim();
+    //     const email = formData.get('email')?.trim();
+    //     const termsAccepted = formData.get('terms');
+
+    //     if (!name) {
+    //         statusMessage.textContent = 'Por favor, ingresa tu nombre.';
+    //         return;
+    //     }
+    //     if (!email) {
+    //         statusMessage.textContent = 'Por favor, ingresa tu correo electrónico.';
+    //         return;
+    //     }
+    //     if (!termsAccepted) {
+    //         statusMessage.textContent = 'Debes aceptar los términos y condiciones.';
+    //         return;
+    //     }
+
+    //     statusMessage.textContent = 'Enviando...';
+    //     statusMessage.style.color = 'black';
+
+    //     // Convertir a objeto, gestionando radios y checkboxes
+    //     const data = {};
+    //     for (const [key, value] of formData.entries()) {
+    //         if (data[key]) {
+    //             if (!Array.isArray(data[key])) {
+    //                 data[key] = [data[key]];
+    //             }
+    //             data[key].push(value);
+    //         } else {
+    //             data[key] = value;
+    //         }
+    //     }
+
+    //     try {
+    //         const response = await fetch('https://jmf-email.vercel.app/api/index.js', {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({
+    //                 nombre: data.name,
+    //                 email: data.email,
+    //                 telefono: data.phone,
+    //                 empresa: data.company || '',
+    //                 motivo: data['hear-about'] || '',
+    //                 intereses: data.interests ? (Array.isArray(data.interests) ? data.interests.join(', ') : data.interests) : '',
+    //                 descripcion: data.message,
+    //             }),
+    //         });
+
+    //         const result = await response.json();
+
+    //         if (!response.ok) {
+    //             throw new Error(result.error || 'Error al enviar el mensaje');
+    //         }
+
+    //         statusMessage.textContent = '¡Mensaje enviado con éxito!';
+    //         statusMessage.style.color = 'green';
+    //         form.reset();
+    //     } catch (error) {
+    //         statusMessage.textContent = error.message;
+    //         statusMessage.style.color = 'red';
+    //     }
+    // });
 </script>
 
