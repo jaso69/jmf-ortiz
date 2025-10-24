@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InnerHero from '../../components/sections/InnerHero.astro';
+import DashboardForm from '@components/forms/DashboardForm.astro';
+
+const seoTitle = "Login | JMF Ortiz";
+const seoDescription = "Servicios de la administración de fincas en Torrejón de Ardoz con más de 40 años de experiencia. Presupuesto gratuito y sin compromiso.";
+
+const heroContent = {
+    title: "Login",
+    description: "Comunidades de vecinos",
+}
+---
+
+<div id="hidden" class="hidden">
+<Layout title={seoTitle} description={seoDescription}>
+    <InnerHero content={heroContent}  />
+        <DashboardForm />
+
+    </Layout>
+</div>
+
+<script>
+    const hiddenDiv = document.querySelector('#hidden') as HTMLDivElement;
+    if(!localStorage.getItem('rpg_auth_token') && !localStorage.getItem('rpg_user_data')){
+        hiddenDiv.classList.add('hidden');
+        window.location.href = '/login';
+    }
+    const API_BASE = 'https://auth-service-eight-mocha.vercel.app/api';
+
+
+    const token = localStorage.getItem('rpg_auth_token');
+
+    const response = await fetch(`${API_BASE}/profile.js`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+    if (!response.ok) {
+        window.location.href = '/login';
+    }
+    hiddenDiv.classList.remove('hidden');
+
+
+</script>

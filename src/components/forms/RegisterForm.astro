@@ -1,0 +1,184 @@
+<div class="flex items-center justify-center mt-8 mb-8">
+    <div class="flex items-center justify-center w-2xl bg-white py-12 px-4 sm:px-6 lg:px-8 rounded-2xl">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Crear nueva cuenta
+          </h2>
+          <p class="mt-2 text-center text-sm text-gray-600">
+            O{' '}
+            <a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500">
+              inicia sesión en tu cuenta
+            </a>
+          </p>
+        </div>
+
+        <form class="mt-8 space-y-6" method="POST">
+          <div class="space-y-4">
+            <!-- Campo Nombre Completo -->
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                Nombre completo
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Tu nombre"
+              />
+            </div>
+
+            <!-- Campo Username (Email) -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                Correo electrónico
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="tu@email.com"
+              />
+            </div>
+
+            <!-- Campo Contraseña -->
+            <div>
+              <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                Contraseña
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                required
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Mínimo 8 caracteres"
+                minlength="8"
+              />
+              <p class="mt-1 text-xs text-gray-500">
+                La contraseña debe tener al menos 8 caracteres
+              </p>
+            </div>
+
+            <!-- Campo Repetir Contraseña -->
+            <div>
+              <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">
+                Repetir contraseña
+              </label>
+              <input
+                id="confirm-password"
+                name="confirmPassword"
+                type="password"
+                autocomplete="new-password"
+                required
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Repite tu contraseña"
+                minlength="8"
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+                id="submit"
+                type="submit"
+                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200"
+            >
+              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                </svg>
+              </span>
+              Crear cuenta
+            </button>
+          </div>
+        </form>
+
+        <!-- Separador -->
+        <div class="mt-6">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-300"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+
+    const API_BASE = 'https://auth-service-eight-mocha.vercel.app/api';
+    const registerForm = document.querySelector('form') as HTMLFormElement;
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        //@ts-ignore
+        const name = registerForm.name.value;
+        const email = registerForm.email.value;
+        const password = registerForm.password.value;
+        const confirmPassword = registerForm.confirmPassword.value;
+        const company = undefined;
+        const submitButton = document.querySelector('#submit') as HTMLButtonElement;
+
+        if (password !== confirmPassword) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+
+        if(!name || !email || !password || !confirmPassword){
+            alert('Por favor, completa todos los campos.');
+            return;
+        }
+
+        if(password.length < 8){
+            alert('La contraseña debe tener al menos 8 caracteres.');
+            return;
+        }
+
+        submitButton.innerText = 'Registrando...';
+        submitButton.disabled = true;
+
+        const userData = {
+            name: name,
+            email: email,
+            password: password,
+            company: company || undefined
+        };
+
+        try {
+            const response = await fetch(`${API_BASE}/register.js`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                const {user, token} = data;
+                console.log(user)
+                localStorage.setItem('rpg_auth_token', token);
+                localStorage.setItem('rpg_user_data', JSON.stringify(user));
+                setTimeout(() => {
+                localStorage.setItem('registerEmail', user.email);
+                window.location.href = `/verify?email=${encodeURIComponent(user.email)}`;
+            }, 100);
+            } else {
+                alert(data.error || 'Error en el registro');
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error en el registro');
+        }
+    });
+</script>
