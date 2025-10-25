@@ -72,6 +72,9 @@
         >
             <option value="">Selecciona una comunidad</option>
         </select>
+        <button type="button" id="loadAsistentes" class="hidden mt-2 text-sm text-blue-600 hover:underline">
+            Abrir lista de asistentes
+        </button>
     </div>
 
       <div>
@@ -156,12 +159,13 @@
   </div>
 </div>
 
-<!-- <dialog id="formComunidad" class="flex flex-col items-center border-8 border-amber-300 w-dvw justify-center p-16 bg-blue-900 hidden"> -->
+<div id="formComunidad" class="flex flex-col absolute top-10 z-40 items-center border-8 border-amber-300 rounded-4xl w-full justify-center p-16 bg-blue-900 hidden">
     <div class="flex w-full justify-center mb-10">
         <div id="tabla-comunidad" class="mt-8 ml-16 px-4">
           <table class="min-w-full bg-white border border-gray-300 rounded-xl shadow-md">
             <thead class="bg-gray-500 font-bold">
               <tr>
+                <th class="w-[50px] px-4 py-3 border-b text-left text-sm font-medium text-gray-50">NUMERO</th>
                 <th class="w-[400px] px-4 py-3 border-b text-left text-sm font-medium text-gray-50">NOMBRE DEL PROPIETARIO</th>
                 <th class="w-[80px] px-4 py-3 border-b text-left text-sm font-medium text-gray-50">PISO</th>
                 <th class="w-[80px] px-4 py-3 border-b text-left text-sm font-medium text-gray-50">COEF.%</th>
@@ -181,7 +185,15 @@
             Guardar Asistentes
         </button>
     </div>
-<!-- </dialog> -->
+</div>
+<table border="1" cellpadding="2" cellspacing="0" class="bg-white">
+        <thead>
+            <th style="font-size: 12px;min-width: 100px; max-width: 500px;">Propietario</th>
+            <th style="font-size: 12px;min-width: 30px; max-width: 50px;">Piso</th>
+            <th style="font-size: 12px;min-width: 30px; max-width: 120px;">Coeficiente</th>
+            <th style="font-size: 12px;min-width: 100px; max-width: 500px;">Representado Por</th>
+        </thead>
+</table>
 <script>
     const token = localStorage.getItem('rpg_auth_token');
     if(!token) {
@@ -193,10 +205,11 @@
     const successMessage = document.getElementById('successMessage');
     const select = document.getElementById('comunidad') as HTMLSelectElement;
     const saveAsistentesBtn = document.getElementById('saveAsistentes') as HTMLButtonElement;
+    const loadAsistentesBtn = document.getElementById('loadAsistentes') as HTMLButtonElement;
     let comunidad = {};
     //@ts-ignore
     let asistentes = [];
-    //const formComunidad = document.getElementById('formComunidad') as HTMLDialogElement;
+    const formComunidad = document.getElementById('formComunidad') as HTMLDialogElement;
     //@ts-ignore
     comunidades.forEach((comunidad) => {
         const option = document.createElement('option');
@@ -205,8 +218,13 @@
         //@ts-ignore
         select.appendChild(option);
     });
+    loadAsistentesBtn.addEventListener('click', () => {
+        formComunidad.classList.remove('hidden');
+    });
 
     saveAsistentesBtn.addEventListener('click', () => {
+        formComunidad.classList.add('hidden');
+        loadAsistentesBtn.classList.remove('hidden');
         asistentes.length = 0;
         const representanteOtros = document.querySelectorAll('.representante-otros') as NodeListOf<HTMLInputElement>;
         const representanteVecino = document.querySelectorAll('.representante-select') as NodeListOf<HTMLSelectElement>;
@@ -272,8 +290,8 @@
         const textoSeleccionado = event.target.options[event.target.selectedIndex].text;
 
         comunidad = await fetchComunidad(comunidadSeleccionada);
-        console.log(comunidad);
         construirTabla(comunidad);
+        formComunidad.classList.remove('hidden');
     });
 
     //@ts-ignore
@@ -294,19 +312,25 @@
         const formData = new FormData(reunionForm);
         //@ts-ignore
         formData.append('asistentesJson', JSON.stringify(asistentes));
-
+        //@ts-ignore
+        const htmlContent = generarHtmlActa(formData, asistentes);
         try {
         // Simular envío de datos al servidor
-        const response = await fetch('https://jmfortiz.jasodev.es/webhook-test/f1bf71db-5673-4971-b906-5c933e42b849', {
+        const response = await fetch('/api/generar-docx', {
             method: 'POST',
-            body: formData,
+            body: JSON.stringify({ html: htmlContent }),
         });
 
-        const data = await response.json();
-
-        console.log(data)
-
-        // Mostrar mensaje de éxito
+        //const data = await response.json();
+        if (response.ok) {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `acta-reunion-${formData.get('fecha')}.docx`;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
         // @ts-ignore
         successMessage.classList.remove('hidden');
 
@@ -371,6 +395,7 @@ const cuerpoTabla = document.getElementById('cuerpo-tabla') as HTMLTableSectionE
       const coeficientePorcentual = ((propietario.coeficiente / 100000) * 100).toFixed(3) + '%';
 
       fila.innerHTML = `
+        <td class="px-4 py-3 text-sm text-gray-900 font-mono">${index + 1}</td>
         <td class="px-4 py-3 text-sm text-gray-900">${propietario.propietario}</td>
         <td class="px-4 py-3 text-sm text-gray-700 font-mono">${propietario.piso}</td>
         <td class="px-4 py-3 text-sm text-gray-700 text-right">${coeficientePorcentual}</td>
@@ -406,19 +431,79 @@ const cuerpoTabla = document.getElementById('cuerpo-tabla') as HTMLTableSectionE
       cuerpoTabla.appendChild(fila);
     });
   }
+  //@ts-ignore
+ function generarHtmlActa(formData, asistentes) {
+    const fechaForm = formData.get('fecha');
+    const [anno, mesNumero, dia] = fechaForm.split('-');
+    const mes = convertirMes(mesNumero);
+    const tablaAsistentes = asistentesArray(asistentes);
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; }
+          </style>
+        </head>
+        <body>
+            <p>
+                <u>ACTA Nº <strong>${formData.get('numActa')}</strong></u> CORRESPONDIENTE A LA JUNTA GENERAL ORDINARIA CELEBRADA POR LA COMUNIDAD DE PROPIETARIOS ${formData.get('comunidad')}, EL DÍA ${dia} DE ${mes} DE ${anno} EN EL ${formData.get('placeJunta')}.
+            </p>
+            <h4>ASISTENTES:</h4>
+            <div style="margin-top: 10px; margin-bottom: 20px;">
+                ${tablaAsistentes}
+            </div>
+            <p>
+                En Torrejón de Ardoz, a ${dia} de ${mes} de ${anno}, siendo las ${formData.get('HoraInicio')} horas y en segunda convocatoria, se reúne la Junta de Propietarios de la ${formData.get('comunidad')} de Torrejón de Ardoz, con la asistencia de los copropietarios que arriba se reseñan, pasándose a continuación a tratar los puntos expuestos en el Orden del Día, de acuerdo a la convocatoria que en el plazo legal se había hecho llegar en tiempo y forma a todos los interesados, como así lo ratifican los asistentes.
+            </p>
+        </body>
+      </html>
+    `;
+    return htmlContent;
+}
 
-/**
- te van a pasar unos datos y tienes que rellenar una tabla como la que te muestro de ejemplo valida para insertar en google sheets. Con los datos proporcinados en el prompt. El header de la tabla no es necesario insertarlo porque ya esta en la tabla y los numeros ya estan puesto en la tabla para que valgan de guia donde insertar la informacion
+function convertirMes(mesNumero: string): string {
+    const meses = {
+        '01': 'Enero',
+        '02': 'Febrero',
+        '03': 'Marzo',
+        '04': 'Abril',
+        '05': 'Mayo',
+        '06': 'Junio',
+        '07': 'Julio',
+        '08': 'Agosto',
+        '09': 'Septiembre',
+        '10': 'Octubre',
+        '11': 'Noviembre',
+        '12': 'Diciembre'
+    };
+    // @ts-ignore
+    return meses[mesNumero] || '';
+}
+//@ts-ignore
+function asistentesArray(asistentes) {
+    let tabla = `<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="font-size: 12px; text-align: left; background-color: #f0f0f0;">Propietario</th>
+                <th style="font-size: 12px; text-align: center; background-color: #f0f0f0;">Piso</th>
+                <th style="font-size: 12px; text-align: center; background-color: #f0f0f0;">Coef%</th>
+                <th style="font-size: 12px; text-align: left; background-color: #f0f0f0;">Representado Por</th>
+            </tr>
+        </thead>
+        <tbody>`;
 
- Ejemplo:
- NOMBRE DEL PROPIETARIO (header->1)
- PISO (header->2)
- COEF.% (header->3)
- REPRESENTADO POR (header->4)
+    //@ts-ignore
+    asistentes.forEach(asistente => {
+        tabla += `<tr>
+            <td style="font-size: 10px; padding: 4px;">${asistente.propietario}</td>
+            <td style="font-size: 10px; padding: 4px; text-align: center;">${asistente.piso}</td>
+            <td style="font-size: 10px; padding: 4px; text-align: center;">${asistente.coeficiente}</td>
+            <td style="font-size: 10px; padding: 4px;">${asistente.representanteVecino || ''}</td>
+        </tr>`;
+    });
 
- 1 (numero)
- DENTAL NEXUS S.L. (NOMBRE DEL PROPIETARIO)
- IZQ.BºD (PISO)
- 0,8410 (COEF.%)
- */
+    tabla += '</tbody></table>';
+    return tabla;
+}
 </script>

@@ -14,6 +14,7 @@
         "@astrojs/vercel": "^8.2.10",
         "@n8n/chat": "^0.61.0",
         "aos": "^2.3.4",
+        "html-to-docx": "^1.8.0",
         "tailwindcss": "^4.1.11"
     },
     "devDependencies": {
@@ -21,6 +22,7 @@
         "@astrojs/sitemap": "^3.4.1",
         "@tailwindcss/vite": "^4.1.11",
         "@types/aos": "^3.0.7",
+        "@types/html-to-docx": "^1.8.0",
         "astro": "^5.11.0",
         "lucide-astro": "^0.483.0",
         "prettier": "^3.5.3",
