@@ -10,7 +10,12 @@ export const POST = async ({ request }) => {
          row: {
             cantSplit: true
         },
-    },
+        border:{
+            size: 0,
+            color: "FFFFFF", 
+            style: "none"
+        }
+        },
       footer: true,
       pageNumber: true,
       font: 'Arial',
