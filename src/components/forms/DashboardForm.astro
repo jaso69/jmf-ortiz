@@ -235,6 +235,9 @@
     const ordenDiv = document.getElementById('ordenDiv') as HTMLDivElement;
     let comunidad = {};
     let direccionComunidad = '';
+    let puntosOrdenDiaElements = document.querySelectorAll('.puntos-orden') as NodeListOf<HTMLParagraphElement>;
+    //@ts-ignore
+    let puntosOrdenDiaArray = [];
     //@ts-ignore
     let pisos = [];
     //@ts-ignore
@@ -365,20 +368,41 @@
         });
         return await response.json();
     };
+//@ts-ignore
+    function formDataToObject(formData) {
+        const obj = {};
+        for (let [key, value] of formData.entries()) {
+            //@ts-ignore
+            obj[key] = value;
+        }
+        return obj;
+    }
 
     reunionForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const formData = new FormData(reunionForm);
+        puntosOrdenDiaElements = document.querySelectorAll('.puntos-orden') as NodeListOf<HTMLParagraphElement>;
         //@ts-ignore
         formData.append('asistentesJson', JSON.stringify(asistentes));
         //@ts-ignore
         const htmlContent = generarHtmlActa(formData, asistentes);
+        const formDataObj = formDataToObject(formData);
+        puntosOrdenDiaElements.forEach((element, index) => {
+            puntosOrdenDiaArray.push({index:index+1,text:element.textContent});
+        });
         try {
         // Simular envío de datos al servidor
-        const response = await fetch('/api/generar-docx', {
+        //const response = await fetch('/api/generar-docx', {
+        //    method: 'POST',
+        //    body: JSON.stringify({ html: htmlContent }),
+        //});
+        //@ts-ignore
+        formDataObj['comunidad'] = direccionComunidad;
+        const response = await fetch('/api/html-docx', {
             method: 'POST',
-            body: JSON.stringify({ html: htmlContent }),
+            // @ts-ignore
+            body: JSON.stringify({ formData: formDataObj, asistentes: asistentes, ordenDia: puntosOrdenDiaArray }),
         });
 
         //const data = await response.json();
@@ -489,14 +513,15 @@ const cuerpoTabla = document.getElementById('cuerpo-tabla') as HTMLTableSectionE
       cuerpoTabla.appendChild(fila);
     });
   }
+
   //@ts-ignore
  function generarHtmlActa(formData, asistentes) {
     const fechaForm = formData.get('fecha');
     const [anno, mesNumero, dia] = fechaForm.split('-');
     const mes = convertirMes(mesNumero);
     const tablaAsistentes = asistentesArray(asistentes);
-    const puntosOrdenDiaElements = document.querySelectorAll('.puntos-orden') as NodeListOf<HTMLParagraphElement>;
     let puntosOrdenDiaHtml = '';
+    //@ts-ignore
     const numeroAsistentes = asistentes.length;
       //@ts-ignore
     const CalculonumeroTotalCoeficientes = asistentes.reduce((total, asistente) => total + parseFloat(asistente.coeficiente), 0);
@@ -504,6 +529,7 @@ const cuerpoTabla = document.getElementById('cuerpo-tabla') as HTMLTableSectionE
     puntosOrdenDiaElements.forEach((element, index) => {
         puntosOrdenDiaHtml += `<p><strong>${index+1}.</strong> ${element.textContent}</p>`;
     });
+
     const [piso, presidente] = formData.get('nombrePresidente').split('/');
 
     const htmlContent = `
