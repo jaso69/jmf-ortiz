@@ -91,7 +91,7 @@ export const POST = async ({ request }) => {
                     bold: true,
                 }),
                 new TextRun({
-                    text: `${orden.text}%`,
+                    text: `${orden.text}`,
                     size: 24,
                 }),
             ]
