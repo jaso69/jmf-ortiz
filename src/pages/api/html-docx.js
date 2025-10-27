@@ -433,7 +433,7 @@ export const POST = async ({ request }) => {
                             width: { size: 5000, type: WidthType.DXA },
                             children: [
                                 new Paragraph({
-                                    alignment: AlignmentType.RIGHT,
+                                    alignment: AlignmentType.CENTER,
                                     children: [
                                         new TextRun({
                                             text: `El Presidente`,
