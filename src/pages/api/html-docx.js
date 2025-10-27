@@ -81,8 +81,8 @@ export const POST = async ({ request }) => {
         ]
     })
     );
-    const orden = ordenDia.map(orden => {
-        return new Paragraph({
+    const orden = ordenDia.flatMap(orden => [
+        new Paragraph({
             alignment: AlignmentType.LEFT,
             children: [
                 new TextRun({
@@ -95,8 +95,18 @@ export const POST = async ({ request }) => {
                     size: 24,
                 }),
             ]
-          });
-    })
+          }),
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [
+                new TextRun({
+                    text: ``,
+                    size: 32,
+                    bold: true,
+                })
+            ]
+          }),
+    ])
     const doc = new Document({
       sections: [{
         properties: {},
