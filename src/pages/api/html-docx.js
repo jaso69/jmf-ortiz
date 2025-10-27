@@ -331,6 +331,16 @@ export const POST = async ({ request }) => {
                 })
             ]
           }),
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [
+                new TextRun({
+                    text: ``,
+                    size: 32,
+                    bold: true,
+                })
+            ]
+          }),
           ...orden,
 
           new Paragraph({
