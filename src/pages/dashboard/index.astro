@@ -38,6 +38,8 @@ const heroContent = {
         });
 
     if (!response.ok) {
+        localStorage.removeItem('rpg_auth_token')
+        localStorage.removeItem('rpg_user_data')
         window.location.href = '/login';
     }
     hiddenDiv.classList.remove('hidden');
