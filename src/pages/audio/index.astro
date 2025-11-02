@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InnerHero from '../../components/sections/InnerHero.astro';
+
+const seoTitle = "Audios Actas | JMF Ortiz";
+const seoDescription = "Servicios de la administración de fincas en Torrejón de Ardoz con más de 40 años de experiencia. Presupuesto gratuito y sin compromiso.";
+
+const heroContent = {
+    title: "Audios Actas",
+    description: "",
+}
+---
+<Layout title={seoTitle} description={seoDescription}>
+    <InnerHero content={heroContent} />
+    <div class="flex flex-col items-center justify-center h-2/3 px-4 py-2 text-amber-50">
+        <label for="archivo">Selecciona un archivo:</label>
+        <input
+            type="file"
+            name="archivo"
+            id="archivo"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            >
+            <h1 class="hidden text-2xl text-green-600 animate-pulse load">Generando acta</h1>
+    </div>
+
+</Layout>
+
+<script>
+    const archivo = document.getElementById('archivo') as HTMLInputElement;
+    const formData = new FormData();
+    const loading = document.querySelector('.load') as HTMLElement;
+    const urlDoc= 'https://docs.google.com/document/d/1ZNGGVloCXuRi_1G7wpycV-VVzRNMX4EWTL0z6E_FcQ8/edit?hl=es&tab=t.0'
+    formData.append('texto', archivo.files![0]);
+    async function subirArchivo() {
+    try {
+        loading.classList.remove('hidden')
+        const respuesta = await fetch('https://jmfortiz.jasodev.es/webhook/f1bf71db-5673-4971-b906-5c933e42b849', {
+            method: 'POST',
+            // @ts-ignore
+            headers: {
+                'Content-Type': archivo.files![0].type,
+                'X-File-Name': encodeURIComponent(archivo.files![0].name),
+                'X-File-Size': archivo.files![0].size,
+                'X-Upload-Timestamp': new Date().toISOString()
+            },
+            body: archivo.files![0],
+        });
+
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+
+        return await respuesta.json();
+
+    } catch (error) {
+        console.error('Error subiendo archivo:', error);
+        throw error;
+    }
+}
+
+// Uso básico
+archivo.addEventListener('change', function(e) {
+    subirArchivo()
+            .then(resultado => {
+                loading!.classList.add('hidden');
+                openDoc();
+                window.location.reload();
+            })
+            .catch(error => {
+                alert('Error al subir el archivo');
+            });
+    });
+
+    function openDoc() {
+        const link = document.createElement('a');
+        link.href = urlDoc;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.click();
+    }
+
+// Uso
+
+</script>
