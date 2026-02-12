@@ -24,6 +24,7 @@ const opacity = content.overlayOpacity ?? 1; // Default opacity if not specified
 ---
 
 <section class="header-offset relative">
+
     {content.backgroundImage && (
         <div class="absolute inset-0 left-0 top-0 w-full h-full overflow-hidden">
             <Image
@@ -43,6 +44,38 @@ const opacity = content.overlayOpacity ?? 1; // Default opacity if not specified
             ></div>
         </div>
     )}
+    <div class="bg-gradient-to-r from-red-600 to-orange-600 text-white px-4 py-3 shadow-lg relative z-50">
+  <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+
+    <div class="flex items-center gap-2 text-sm sm:text-base font-medium">
+      <span class="inline-flex items-center justify-center w-6 h-6 bg-white/20 rounded-full shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </span>
+      <span>
+        ⚠️ <strong class="font-semibold">Por motivos ajenos,</strong> esta administración nuestra la línea habitual no funciona.
+      </span>
+    </div>
+
+    <div class="flex items-center gap-3 shrink-0">
+      <span class="hidden sm:inline text-white/80 text-sm">alternativamente pueden llamar al</span>
+      <a
+        href="tel:916565697"
+        class="inline-flex items-center gap-2 bg-white text-red-700 hover:bg-red-50 px-4 py-2 rounded-full font-bold text-base shadow-md transition-all duration-200 hover:scale-105"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        91 656 56 97
+      </a>
+    </div>
+
+  </div>
+</div>
 
     <div class="site-container mx-auto px-4 py-large relative z-10 flex flex-col md:items-center md:justify-center md:text-center">
         <h1 class="text-white text-balance" data-aos="fade-up">{content.title}</h1>
