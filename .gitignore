@@ -21,5 +21,9 @@ reunion.txt
 # macOS-specific files
 .DS_Store
 
+# vercel build output
+.vercel/output/
+
 # jetbrains setting folder
 .idea/
+.agents/
