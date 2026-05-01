@@ -1,4 +1,13 @@
-# Allow all web crawlers
 User-agent: *
 Allow: /
+
+Disallow: /login/
+Disallow: /register/
+Disallow: /verify/
+Disallow: /dashboard/
+Disallow: /audio/
+Disallow: /style-guide/
+Disallow: /theme-info/
+Disallow: /api/
+
 Sitemap: https://www.jmfortiz.com/sitemap.xml

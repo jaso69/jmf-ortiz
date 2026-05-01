@@ -32,9 +32,23 @@ const paddingClass = getPaddingClass({
 
 const headlineColor = getHeadlineColor(background);
 const textColor = getTextColor(background);
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        "name": question,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": answer
+        }
+    }))
+};
 ---
 
 <section class:list={["relative", bgColor, paddingClass]}>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
     <div class="site-container px-4">
         {(title || description) && (
             <div class="max-w-3xl mx-auto text-center mb-12">
