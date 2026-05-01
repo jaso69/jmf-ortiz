@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InnerHero from '../../components/sections/InnerHero.astro';
+import VerifyEmail from '@components/forms/VerifyEmail.astro';
+
+const seoTitle = "Login | JMF Ortiz";
+const seoDescription = "Servicios de la administración de fincas en Torrejón de Ardoz con más de 40 años de experiencia. Presupuesto gratuito y sin compromiso.";
+
+const heroContent = {
+    title: "Login",
+    description: "Comunidades de vecinos",
+}
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+    <InnerHero content={heroContent}  />
+    <VerifyEmail />
+
+</Layout>
