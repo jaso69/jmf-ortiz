@@ -44,7 +44,7 @@ const sortedTeamMembers = teamMembers.sort((a, b) => a.data.order - b.data.order
                                         quality={80}
                                         format="webp"
                                         class="w-full h-auto aspect-[3/4] object-cover rounded-md group-hover:scale-[1.02] hover:brightness-110 transition-all duration-500 ease-in-out"
-                                        loading="eager"
+                                        loading={index < 4 ? "eager" : "lazy"}
                                         decoding="async"
                                     />
                                 ) : (

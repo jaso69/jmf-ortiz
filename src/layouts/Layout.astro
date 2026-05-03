@@ -80,7 +80,11 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 		<meta name="robots" content={robotsContent} />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Noto+Sans+KR:wght@100..900&display=swap" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Noto+Sans+KR:wght@100..900&display=swap" media="print" onload="this.media='all'" />
+		<noscript>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Noto+Sans+KR:wght@100..900&display=swap" />
+		</noscript>
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={fullCanonicalUrl} />
@@ -111,10 +115,14 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 
 		<script>
 			import AOS from 'aos';
-			AOS.init({
-				duration: 800,
-				once: true,
-			});
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (!prefersReducedMotion) {
+				AOS.init({
+					duration: 600,
+					once: true,
+					offset: 50,
+				});
+			}
 		</script>
 	</body>
 </html>
