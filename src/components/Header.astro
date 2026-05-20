@@ -59,11 +59,6 @@ const isCurrentPage = (link: string) => {
                         Actas
                     </button>
                 </div>
-                <div id="loginBtn" class="hidden">
-                    <button class="text-accent text-sm px-4 py-1 border-2 rounded-xl hover:opacity-90 focus-visible:ring-accent hover:ring-2 hover:ring-accent hover:ring-offset-2" aria-label="Iniciar sesión">
-                        Login
-                    </button>
-                </div>
                 <div id="logoutBtn" class="hidden">
                     <button class="text-accent text-sm px-4 py-1 border-2 rounded-xl hover:opacity-90 focus-visible:ring-accent hover:ring-2 hover:ring-accent hover:ring-offset-2" aria-label="Cerrar sesión">
                         Logout
@@ -126,24 +121,15 @@ const isCurrentPage = (link: string) => {
 
 <script>
     const userToken = localStorage.getItem('rpg_auth_token');
-    const loginBtn = document.getElementById('loginBtn') as HTMLElement;
     const logoutBtn = document.getElementById('logoutBtn') as HTMLElement;
     const dashboardBtn = document.getElementById('dashboardBtn') as HTMLElement;
     if (userToken) {
-        loginBtn.classList.add('hidden');
         logoutBtn.classList.remove('hidden');
         dashboardBtn.classList.remove('hidden');
     } else {
-        loginBtn.classList.remove('hidden');
         logoutBtn.classList.add('hidden');
         dashboardBtn.classList.add('hidden');
-
     }
-
-    loginBtn.addEventListener('click', () => {
-        if(window.location.pathname === '/login') return
-        window.location.href = '/login';
-    });
 
     logoutBtn.addEventListener('click', () => {
         logoutBtn.classList.add('hidden');
