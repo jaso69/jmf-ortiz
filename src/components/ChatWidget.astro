@@ -1,0 +1,530 @@
+---
+export interface Props {
+    idPrefix?: string;
+    wrapperClass?: string;
+    height?: string;
+    avatarTitle?: string;
+    welcomeMessage?: string;
+}
+
+const {
+    idPrefix = 'jmf-chat',
+    wrapperClass = '',
+    height = '650px',
+    avatarTitle = 'JMF Ortiz',
+    welcomeMessage = 'Administrador virtual JMF Ortiz a tu servicio. ¿En qué puedo ayudarte hoy?'
+} = Astro.props;
+
+const messagesId = `${idPrefix}-messages`;
+const typingId = `${idPrefix}-typing`;
+const formId = `${idPrefix}-form`;
+const inputId = `${idPrefix}-input`;
+const sendId = `${idPrefix}-send`;
+const classPrefix = idPrefix.replace('-chat', '');
+---
+
+<div class:list={["jmf-chat-wrapper", wrapperClass]}>
+    <div class="jmf-chat" id={idPrefix} style={`height: ${height};`}>
+        <div class="jmf-chat__header">
+            <div class="jmf-chat__avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <div class="jmf-chat__header-info">
+                <h3>{avatarTitle}</h3>
+                <span class="jmf-chat__status">
+                    <span class="jmf-chat__status-dot"></span>
+                    En línea
+                </span>
+            </div>
+        </div>
+
+        <div class="jmf-chat__messages" id={messagesId} aria-live="polite" aria-atomic="false" aria-relevant="additions text">
+        </div>
+
+        <div class="jmf-chat__footer">
+            <div class="jmf-chat__typing" id={typingId} aria-label="El administrador está escribiendo" role="status">
+                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            </div>
+            <form id={formId} class="jmf-chat__input-wrap">
+                <input type="text" id={inputId} placeholder="Escribe tu consulta..." autocomplete="off" />
+                <button type="submit" id={sendId} aria-label="Enviar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script define:vars={{ messagesId, typingId, formId, inputId, welcomeMessage }}>
+(function() {
+    const WEBHOOK_URL = 'https://jmfortiz.jasodev.es/webhook/77abf0dd-4cdf-4984-9682-8caec2373b93';
+    const SESSION_KEY = 'jmf_chat_session';
+
+    let sessionId = localStorage.getItem(SESSION_KEY);
+    if (!sessionId) {
+        sessionId = 'sess_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        localStorage.setItem(SESSION_KEY, sessionId);
+    }
+
+    function formatTime(d) {
+        return d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function escapeHtml(t) {
+        const d = document.createElement('div');
+        d.textContent = t;
+        return d.innerHTML;
+    }
+
+    function scrollDown() {
+        const el = document.getElementById(messagesId);
+        if (el) setTimeout(() => el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }), 50);
+    }
+
+    function createBotMsg() {
+        const wrap = document.getElementById(messagesId);
+        if (!wrap) return null;
+
+        const row = document.createElement('div');
+        row.className = 'jmf-msg jmf-msg--bot';
+
+        row.innerHTML =
+            '<div class="jmf-msg__avatar">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                    '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>' +
+                    '<circle cx="12" cy="7" r="4"/>' +
+                '</svg>' +
+            '</div>' +
+            '<div class="jmf-msg__body">' +
+                '<p class="jmf-msg__text"></p>' +
+                '<span class="jmf-msg__time">' + formatTime(new Date()) + '</span>' +
+            '</div>';
+
+        wrap.appendChild(row);
+        scrollDown();
+        return row.querySelector('.jmf-msg__text');
+    }
+
+    function createUserMsg(text) {
+        const wrap = document.getElementById(messagesId);
+        if (!wrap) return;
+
+        const row = document.createElement('div');
+        row.className = 'jmf-msg jmf-msg--user';
+
+        row.innerHTML =
+            '<div class="jmf-msg__body">' +
+                '<p>' + escapeHtml(text) + '</p>' +
+                '<span class="jmf-msg__time">' + formatTime(new Date()) + '</span>' +
+            '</div>';
+
+        wrap.appendChild(row);
+        scrollDown();
+    }
+
+    async function send(text) {
+        const typing = document.getElementById(typingId);
+        if (typing) typing.style.display = 'flex';
+
+        createUserMsg(text);
+
+        const input = document.getElementById(inputId);
+        if (input) input.value = '';
+
+        try {
+            const res = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: text,
+                    sessionId: sessionId,
+                    timestamp: new Date().toISOString()
+                })
+            });
+
+            if (typing) typing.style.display = 'none';
+
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+
+            const textEl = createBotMsg();
+            if (!textEl) return;
+
+            const reader = res.body?.getReader();
+            if (!reader) {
+                textEl.textContent = await res.text();
+                scrollDown();
+                return;
+            }
+
+            const decoder = new TextDecoder();
+            let output = '';
+            let done = false;
+
+            while (!done) {
+                const chunk = await reader.read();
+                done = chunk.done;
+                if (done) break;
+
+                const str = decoder.decode(chunk.value, { stream: true });
+                const lines = str.split('\n');
+
+                for (const line of lines) {
+                    const trimmed = line.trim();
+                    if (!trimmed || trimmed === '0') continue;
+
+                    try {
+                        const data = JSON.parse(trimmed);
+
+                        if (data.type === 'item' && data.content) {
+                            if (data.metadata?.nodeName === 'Respond to Webhook') {
+                                try {
+                                    const parsed = JSON.parse(data.content);
+                                    output = parsed.output || data.content;
+                                } catch {
+                                    output = data.content;
+                                }
+                            } else {
+                                output += data.content;
+                            }
+                            textEl.textContent = output;
+                            scrollDown();
+                        }
+
+                        if (data.type === 'end' && data.metadata?.nodeName === 'Respond to Webhook') {
+                            done = true;
+                            break;
+                        }
+                    } catch {}
+                }
+            }
+
+            if (!textEl.textContent && output) {
+                textEl.textContent = output;
+            }
+            scrollDown();
+
+        } catch (err) {
+            if (typing) typing.style.display = 'none';
+            const errEl = createBotMsg();
+            if (errEl) errEl.textContent = 'Lo siento, ha ocurrido un error. Inténtalo de nuevo.';
+            console.error('Chat error:', err);
+        }
+    }
+
+    function init() {
+        const wrap = document.getElementById(messagesId);
+        if (wrap) {
+            const row = document.createElement('div');
+            row.className = 'jmf-msg jmf-msg--bot';
+            row.innerHTML =
+                '<div class="jmf-msg__avatar">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                        '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>' +
+                        '<circle cx="12" cy="7" r="4"/>' +
+                    '</svg>' +
+                '</div>' +
+                '<div class="jmf-msg__body">' +
+                    '<p class="jmf-msg__text">' + welcomeMessage + '</p>' +
+                    '<span class="jmf-msg__time">' + formatTime(new Date()) + '</span>' +
+                '</div>';
+            wrap.appendChild(row);
+        }
+
+        const form = document.getElementById(formId);
+        const input = document.getElementById(inputId);
+
+        if (form && input) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const val = input.value.trim();
+                if (val) send(val);
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+
+<style is:global>
+.jmf-chat-wrapper {
+    max-width: 56rem;
+    width: 100%;
+    margin: 2.5rem auto;
+    padding: 0 1rem;
+}
+
+.jmf-chat {
+    background: linear-gradient(145deg, #1e2340 0%, #151929 100%);
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.jmf-chat__header {
+    background: linear-gradient(135deg, rgba(53,87,193,0.15) 0%, rgba(53,87,193,0.05) 100%);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.jmf-chat__avatar {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    background: linear-gradient(135deg, #3557c1 0%, #1a3c8c 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(53,87,193,0.4);
+}
+
+.jmf-chat__avatar svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.jmf-chat__header-info h3 {
+    font-family: var(--font-headline);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+}
+
+.jmf-chat__status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+}
+
+.jmf-chat__status-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    animation: jmf-pulse 2s ease-in-out infinite;
+}
+
+@keyframes jmf-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+}
+
+.jmf-chat__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.jmf-chat__messages::-webkit-scrollbar { width: 6px; }
+.jmf-chat__messages::-webkit-scrollbar-track { background: transparent; }
+.jmf-chat__messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+.jmf-msg {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+    animation: jmf-slide 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes jmf-slide {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.jmf-msg--user {
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+
+.jmf-msg__avatar {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    background: linear-gradient(135deg, #3557c1 0%, #1a3c8c 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.jmf-msg__avatar svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+}
+
+.jmf-msg__body {
+    max-width: 75%;
+    padding: 0.875rem 1.125rem;
+    border-radius: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.jmf-msg--bot .jmf-msg__body {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-bottom-left-radius: 0.35rem;
+    color: #ffffff;
+}
+
+.jmf-msg--user .jmf-msg__body {
+    background: linear-gradient(135deg, #3557c1 0%, #1a3c8c 100%);
+    border-bottom-right-radius: 0.35rem;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(53,87,193,0.35);
+}
+
+.jmf-msg__text {
+    margin: 0;
+    color: #ffffff;
+}
+
+.jmf-msg__body p {
+    margin: 0;
+    color: #ffffff;
+}
+
+.jmf-msg__time {
+    display: block;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.4rem;
+}
+
+.jmf-msg--user .jmf-msg__time {
+    text-align: right;
+}
+
+.jmf-chat__footer {
+    padding: 1rem 1.5rem 1.25rem;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.jmf-chat__typing {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.75rem;
+    background: rgba(255,255,255,0.06);
+    border-radius: 1rem;
+    width: fit-content;
+}
+
+.jmf-chat__typing span {
+    width: 7px;
+    height: 7px;
+    background: #3557c1;
+    border-radius: 50%;
+    animation: jmf-bounce 1.4s ease-in-out infinite;
+}
+
+.jmf-chat__typing span:nth-child(2) { animation-delay: 0.2s; }
+.jmf-chat__typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes jmf-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+}
+
+.jmf-chat__input-wrap {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.25rem;
+    padding: 0.35rem 0.35rem 0.35rem 1.25rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.jmf-chat__input-wrap:focus-within {
+    border-color: #3557c1;
+    box-shadow: 0 0 0 3px rgba(53,87,193,0.35);
+}
+
+.jmf-chat__input-wrap input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-family: var(--font-base);
+    min-width: 0;
+}
+
+.jmf-chat__input-wrap input::placeholder {
+    color: rgba(255,255,255,0.45);
+}
+
+.jmf-chat__input-wrap button {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    background: linear-gradient(135deg, #3557c1 0%, #1a3c8c 100%);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.jmf-chat__input-wrap button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(53,87,193,0.4);
+}
+
+.jmf-chat__input-wrap button:active {
+    transform: scale(0.95);
+}
+
+.jmf-chat__input-wrap button svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+    margin-left: 2px;
+}
+
+@media (max-width: 640px) {
+    .jmf-chat {
+        height: calc(100vh - 200px);
+        border-radius: 1rem;
+    }
+    .jmf-chat__header { padding: 1rem; }
+    .jmf-chat__messages { padding: 1rem; }
+    .jmf-msg__body { max-width: 85%; }
+    .jmf-chat__footer { padding: 0.75rem 1rem 1rem; }
+}
+</style>

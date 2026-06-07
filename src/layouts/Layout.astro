@@ -40,7 +40,7 @@ const organizationSchema = {
 	"@id": `${siteConfig.siteUrl}#organization`,
 	"name": siteConfig.companyName,
 	"url": siteConfig.siteUrl,
-	"telephone": siteConfig.Socials.Phone.trim(),
+	"telephone": `+34 ${siteConfig.Socials.Phone.replace(/\s/g, '')}`,
 	"email": siteConfig.Socials.Email,
 	"address": {
 		"@type": "PostalAddress",
@@ -56,8 +56,55 @@ const organizationSchema = {
 		"opens": "09:00",
 		"closes": "18:00"
 	},
-	"priceRange": "\u20AC"
+	"priceRange": "\u20AC",
+	"image": defaultImage
 };
+
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"@id": `${siteConfig.siteUrl}#website`,
+	"url": siteConfig.siteUrl,
+	"name": SiteName,
+	"publisher": {
+		"@id": `${siteConfig.siteUrl}#organization`
+	},
+	"potentialAction": {
+		"@type": "SearchAction",
+		"target": {
+			"@type": "EntryPoint",
+			"urlTemplate": `${siteConfig.siteUrl}/search?q={search_term_string}`
+		},
+		"query-input": "required name=search_term_string"
+	}
+};
+
+// Build breadcrumb from pathname
+const pathParts = canonicalPath.split('/').filter(Boolean);
+const breadcrumbItems = pathParts.map((part, index) => {
+	const href = '/' + pathParts.slice(0, index + 1).join('/');
+	const name = part.replace(/-/g, ' ').replace(/^\w/, c => c.toUpperCase());
+	return {
+		"@type": "ListItem",
+		"position": index + 2,
+		"name": name,
+		"item": new URL(href, siteConfig.siteUrl).toString()
+	};
+});
+
+const breadcrumbSchema = pathParts.length > 0 ? {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{
+			"@type": "ListItem",
+			"position": 1,
+			"name": "Inicio",
+			"item": siteConfig.siteUrl
+		},
+		...breadcrumbItems
+	]
+} : null;
 
 const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 
@@ -100,7 +147,9 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 		<meta property="twitter:description" content={pageDescription} />
 		{pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
 		<!-- JSON-LD Structured Data -->
-		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}></script>
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)}></script>
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)}></script>
+		{breadcrumbSchema && <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)}></script>}
     </head>
 	<body data-theme={theme} class="bg-background-dark">
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
