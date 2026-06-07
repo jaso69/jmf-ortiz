@@ -15,13 +15,13 @@
         </div>
     </div>
 
-    <div class="jmf-contact-chat__messages" id="jmf-contact-messages">
+    <div class="jmf-contact-chat__messages" id="jmf-contact-messages" aria-live="polite" aria-atomic="false" aria-relevant="additions text">
     </div>
 
     <div class="jmf-contact-chat__footer">
-        <div class="jmf-contact-chat__typing" id="jmf-contact-typing">
-            <span></span><span></span><span></span>
-        </div>
+    <div class="jmf-contact-chat__typing" id="jmf-contact-typing" aria-label="El administrador está escribiendo" role="status">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </div>
         <form id="jmf-contact-form" class="jmf-contact-chat__input-wrap">
             <input type="text" id="jmf-contact-input" placeholder="Escribe tu consulta..." autocomplete="off" />
             <button type="submit" id="jmf-contact-send" aria-label="Enviar">

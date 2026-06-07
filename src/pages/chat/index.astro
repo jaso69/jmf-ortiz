@@ -7,7 +7,7 @@ const seoDescription = "Administrador virtual de la administración de fincas en
 
 const heroContent = {
     title: "Administrador Virtual",
-    description: "JMF Ortiz",
+    description: "Resuelve tus dudas sobre administración de fincas con nuestro asistente virtual disponible las 24 horas.",
 }
 ---
 
@@ -41,12 +41,12 @@ const heroContent = {
           </div>
         </div>
 
-        <div class="jmf-chat__messages" id="jmf-messages">
+        <div class="jmf-chat__messages" id="jmf-messages" aria-live="polite" aria-atomic="false" aria-relevant="additions text">
         </div>
 
         <div class="jmf-chat__footer">
-          <div class="jmf-chat__typing" id="jmf-typing">
-            <span></span><span></span><span></span>
+          <div class="jmf-chat__typing" id="jmf-typing" aria-label="El administrador está escribiendo" role="status">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
           </div>
           <form id="jmf-form" class="jmf-chat__input-wrap">
             <input type="text" id="jmf-input" placeholder="Escribe tu consulta..." autocomplete="off" />

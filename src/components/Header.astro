@@ -54,16 +54,6 @@ const isCurrentPage = (link: string) => {
                 </ul>
 
                 <Button href={ctaButton.link} variant="primary">{ctaButton.name}</Button>
-                <div id="dashboardBtn" class="hidden">
-                    <button class="bg-green-200 text-sm text-accent px-4 py-1 border-2 rounded-xl hover:opacity-90 focus-visible:ring-accent hover:ring-2 hover:ring-accent hover:ring-offset-2" aria-label="Ir al panel de actas">
-                        Actas
-                    </button>
-                </div>
-                <div id="logoutBtn" class="hidden">
-                    <button class="text-accent text-sm px-4 py-1 border-2 rounded-xl hover:opacity-90 focus-visible:ring-accent hover:ring-2 hover:ring-accent hover:ring-offset-2" aria-label="Cerrar sesión">
-                        Logout
-                    </button>
-                </div>
                 {/* Mobile Menu Button */}
                 <button
                     class="mobile-menu-button relative z-30 p-2 border-none cursor-pointer bg-transparent lg:hidden"
@@ -120,30 +110,6 @@ const isCurrentPage = (link: string) => {
 </header>
 
 <script>
-    const userToken = localStorage.getItem('rpg_auth_token');
-    const logoutBtn = document.getElementById('logoutBtn') as HTMLElement;
-    const dashboardBtn = document.getElementById('dashboardBtn') as HTMLElement;
-    if (userToken) {
-        logoutBtn.classList.remove('hidden');
-        dashboardBtn.classList.remove('hidden');
-    } else {
-        logoutBtn.classList.add('hidden');
-        dashboardBtn.classList.add('hidden');
-    }
-
-    logoutBtn.addEventListener('click', () => {
-        logoutBtn.classList.add('hidden');
-        dashboardBtn.classList.add('hidden');
-        localStorage.clear();
-        sessionStorage.removeItem('rpg_auth_token');
-        window.location.href = '/login';
-    });
-
-    dashboardBtn.addEventListener('click', () => {
-        if(window.location.pathname === '/dashboard') return
-        window.location.href = '/dashboard';
-    });
-
     // Desktop Menu
     const desktopMenuItems = document.querySelectorAll('.group');
 
