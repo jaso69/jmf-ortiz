@@ -76,24 +76,25 @@ const paddingClass = getPaddingClass({
             </div>
         )}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-auto-fit gap-8 auto-rows-fr">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-auto-fit gap-6 auto-rows-fr">
             {features.map((feature, index) => (
                 <div 
                     class:list={[
-                        "p-6 rounded-lg border border-black",
-                        background === 'dark' ? 'bg-background-base/10' : 'bg-background/90',
+                        "p-6 rounded-lg border border-stone-200 shadow-sm",
+                        background === 'dark' ? 'bg-white/5 border-white/10' : 'bg-white',
                         "flex flex-col"
                     ]}
                     data-aos="fade-up"
                     data-aos-delay={index * 100}
                 >
                     <div class:list={[
-                        "w-12 h-12 flex items-center justify-center rounded-lg mb-4",
-                        "bg-primary"
+                        "w-11 h-11 flex items-center justify-center rounded-md mb-4",
+                        background === 'dark' ? 'bg-white/10' : 'bg-primary/10'
                     ]}>
                         <feature.icon
                             size={24}
-                            class="text-white"
+                            class:list={[background === 'dark' ? 'text-white' : 'text-primary']}
+                            stroke-width={1.75}
                         />
                     </div>
                     <h3 class:list={["text-h4 mb-2", textColor]}>

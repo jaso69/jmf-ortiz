@@ -24,21 +24,18 @@ export const statsLists: Record<string, StatsList> = {
         id: 'main',
         stats: [
             {
-                value: 10,
-                label: 'Theme Configurations',
+                value: 40,
+                label: 'Años de experiencia',
+                suffix: '+'
             },
             {
-                value: 11,
-                label: 'Pre-Built Components',
+                value: 100,
+                label: 'Comunidades gestionadas',
+                suffix: '+'
             },
             {
-                value: 48,
-                label: 'Team Members',
-            },
-            {
-                value: 500000,
-                label: 'Lines of Code',
-                prefix: '+'
+                value: 1,
+                label: 'Objetivo: tu tranquilidad'
             }
         ]
     },
@@ -47,13 +44,15 @@ export const statsLists: Record<string, StatsList> = {
         stats: [
             {
                 value: 40,
-                label: 'Màs de 40 años de experiencia',
+                label: 'Más de 40 años de experiencia',
+                suffix: '+'
             },
             {
                 value: 100,
-                label: 'Màs de 100 comundades',
+                label: 'Más de 100 comunidades gestionadas',
+                suffix: '+'
             },
-            
+
         ]
     }
 };

@@ -20,15 +20,15 @@ const {
   ...rest
 } = Astro.props;
 
-const baseStyles = 'group relative inline-flex overflow-hidden items-center justify-center rounded-border-small font-medium transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-md flex items-center gap-2';
+const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2';
 
 
 const variants = {
-  primary: 'bg-primary text-white hover:bg-primary-light focus-visible:ring-primary hover:ring-2 hover:ring-primary hover:ring-offset-2',
-  secondary: 'bg-secondary text-white hover:bg-secondary-light focus-visible:ring-secondary hover:ring-2 hover:ring-secondary hover:ring-offset-2',
-  accent: 'bg-accent text-white hover:opacity-90 focus-visible:ring-accent hover:ring-2 hover:ring-accent hover:ring-offset-2',
-  ghostLight: 'text-white ring-2 ring-white focus-visible:ring-white hover:ring-2 hover:ring-black hover:ring-offset-2',
-  ghostDark: 'text-body-base ring-2 ring-text focus-visible:ring-text hover:ring-2 hover:ring-black hover:ring-offset-2',
+  primary: 'bg-primary text-white hover:bg-primary-light focus-visible:ring-primary',
+  secondary: 'bg-secondary text-white hover:bg-secondary-light focus-visible:ring-secondary',
+  accent: 'bg-accent text-white hover:bg-primary-light focus-visible:ring-accent',
+  ghostLight: 'text-white ring-1 ring-white/80 hover:bg-white/10 focus-visible:ring-white',
+  ghostDark: 'text-body-base ring-1 ring-body-base/30 hover:bg-body-base/5 focus-visible:ring-body-base',
 };
 
 const sizes = {
@@ -56,7 +56,6 @@ const Element = href ? 'a' : 'button';
   aria-disabled={disabled}
   {...(target && { target, rel: target === '_blank' ? 'noopener noreferrer' : undefined })}
 >
-  <span class="absolute left-0 -mt-12 h-32 w-1/2 translate-x-[250%] rotate-12 bg-white opacity-20 transition-all duration-250 ease-out group-hover:translate-x-[2%]"></span>
   <slot />
 </Element>
 

@@ -2,30 +2,30 @@
 
 @theme {
 
-    --color-primary: #3557c1;
-    --color-primary-light: #4b6ed4;
-    --color-primary-dark: #1a3c8c;
+    --color-primary: #1e3a5f;
+    --color-primary-light: #2c4a6e;
+    --color-primary-dark: #132a45;
 
-    --color-secondary: #cc9900;
-    --color-secondary-light: #e6b800;
-    --color-secondary-dark: #997300;
+    --color-secondary: #7a2e2e;
+    --color-secondary-light: #963a3a;
+    --color-secondary-dark: #5c2323;
 
-    --color-accent: #1e3c8c;
-    --color-background: #f8f9ff;
-    --color-background-light: #eef1ff;
-    --color-background-dark: #1a1f3c;
+    --color-accent: #2c4a6e;
+    --color-background: #faf9f7;
+    --color-background-light: #f0efe8;
+    --color-background-dark: #1f2937;
 
-    --color-headline: #1a1f3c;
-    --color-headline-light: #1a1f3c;
+    --color-headline: #1f2937;
+    --color-headline-light: #1f2937;
     --color-headline-dark: #ffffff;
 
-    --color-eyebrow: #1e3c8c;
-    --color-eyebrow-light: #1e3c8c;
-    --color-eyebrow-dark: #e6b800;
+    --color-eyebrow: #2c4a6e;
+    --color-eyebrow-light: #2c4a6e;
+    --color-eyebrow-dark: #d4c5b0;
 
-    --color-body-base: #1a1f3c;
-    --color-body-light: #1a1f3c;
-    --color-body-dark: #ffffff;
+    --color-body-base: #374151;
+    --color-body-light: #374151;
+    --color-body-dark: #f3f4f6;
 
     --color-input: var(--color-background-light);
     --color-input-light: var(--color-background-light);
@@ -79,36 +79,36 @@
     --border-radius-base: 1rem;
     --border-radius-large: 2rem;
 
-    --font-bruno-ace: 'Bruno Ace SC', sans-serif;
-    --font-noto-sans-kr: "Noto Sans KR", sans-serif;
-    --font-base: 'Noto Sans KR', sans-serif;
-    --font-logo: 'Bruno Ace SC', sans-serif;
-    --font-headline: 'Noto Sans KR', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-source-serif: 'Source Serif 4', serif;
+    --font-base: 'Inter', sans-serif;
+    --font-logo: 'Source Serif 4', serif;
+    --font-headline: 'Source Serif 4', serif;
 }
 
 @layer base {
 
 
     [data-theme='zeus'] {
-        --color-primary: #3557c1;
-        --color-primary-light: #4b6ed4;
-        --color-primary-dark: #1a3c8c;
-        --color-secondary: #cc9900;
-        --color-secondary-light: #e6b800;
-        --color-secondary-dark: #997300;
-        --color-accent: #1e3c8c;
-        --color-background: #f8f9ff;
-        --color-background-light: #eef1ff;
-        --color-background-dark: #1a1f3c;
-        --color-headline: #1a1f3c;
-        --color-headline-light: #1a1f3c;
+        --color-primary: #1e3a5f;
+        --color-primary-light: #2c4a6e;
+        --color-primary-dark: #132a45;
+        --color-secondary: #7a2e2e;
+        --color-secondary-light: #963a3a;
+        --color-secondary-dark: #5c2323;
+        --color-accent: #2c4a6e;
+        --color-background: #faf9f7;
+        --color-background-light: #f0efe8;
+        --color-background-dark: #1f2937;
+        --color-headline: #1f2937;
+        --color-headline-light: #1f2937;
         --color-headline-dark: #ffffff;
-        --color-body-base: #1a1f3c;
-        --color-body-light: #1a1f3c;
-        --color-body-dark: #ffffff;
-        --color-eyebrow: #1e3c8c;
-        --color-eyebrow-light: #1e3c8c;
-        --color-eyebrow-dark: #e6b800;
+        --color-body-base: #374151;
+        --color-body-light: #374151;
+        --color-body-dark: #f3f4f6;
+        --color-eyebrow: #2c4a6e;
+        --color-eyebrow-light: #2c4a6e;
+        --color-eyebrow-dark: #d4c5b0;
         --color-input: var(--color-background-light);
         --color-input-light: var(--color-background-light);
         --color-input-dark: var(--color-background-dark);

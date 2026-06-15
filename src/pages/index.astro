@@ -15,31 +15,32 @@ const seoTitle = "Administradores de fincas JMF Ortiz";
 const seoDescription = "Administradores de Fincas en Torrejón de Ardoz con más de 40 años de experiencia. Presupuesto gratuito y sin compromiso."
 
 const heroContent = {
-    title: 'Administradores de fincas JMF Ortiz',
-    description: 'Administradores de Fincas en Torrejón de Ardoz con más de 40 años de experiencia. Presupuesto gratuito y sin compromiso.',
+    title: 'Administradores de Fincas JMF Ortiz',
+    description: 'Gestión integral de comunidades de propietarios en Torrejón de Ardoz y Madrid. Más de 40 años de experiencia al servicio de su finca.',
     buttons: [
         {
-            text: 'Contacto',
+            text: 'Solicitar presupuesto',
             link: '/contact',
             target: '_self'
         },
         {
-            text: 'Habla con nuestro Administrador virtual',
+            text: 'Hablar con nuestro asistente',
             link: '/chat',
             target: '_self'
         }
     ],
     backgroundImage: heroImage,
-    overlayOpacity: 0.2
+    overlayOpacity: 0.25,
+    badge: 'Más de 40 años de experiencia'
 }
 
 const featuresSection = {
     eyebrow: "",
     title: "Gestión de fincas en Torrejón de Ardoz",
-    description: "Somos una empresa especializada en la administración y mantenimiento integral de comunidades. Con nuestra experiencia en el sector, nos esforzamos por ofrecer un servicio de alta calidad y un enfoque en la gestión de fincas.",
+    description: "Somos una empresa familiar especializada en la administración y mantenimiento integral de comunidades de propietarios. Ofrecemos un servicio cercano, transparente y de alta calidad.",
     features: featureLists.main.features,
     button: {
-        text: "Resuelve tus dudas con nuestro agente",
+        text: "Resolver dudas con nuestro asistente",
         link: "/chat",
         variant: "primary" as const
     }
@@ -47,11 +48,11 @@ const featuresSection = {
 
 const FooterCta = {
     eyebrow: "",
-    title: ' Contacto con la administración de fincas',
-    description: 'Ponemos a tu disposición un teléfono con centralita para que ninguna llamada se pierda, un formulario de contacto para atender tus consultas y un asistente virtual disponible las 24 horas.',
+    title: 'Contacte con la administración de fincas',
+    description: 'Ponemos a su disposición teléfono con centralita, formulario de contacto y un asistente virtual para atender sus consultas con la mayor diligencia.',
     hideCta: false,
     button: {
-        text: 'Habla con nosotros',
+        text: 'Contactar',
         link: '/contact',
         target: '_self'
     }
@@ -59,8 +60,8 @@ const FooterCta = {
 
 const styleGuideSection = {
     eyebrow: "",
-    headline: "Nos Ocupamos de Todo",
-    description: "Nos encargamos de la contabilidad, gestión de cobros, contratación de servicios, mantenimiento de instalaciones y cualquier otro trámite necesario.",
+    headline: "Gestión integral de su comunidad",
+    description: "Nos encargamos de la contabilidad, gestión de cobros, contratación de servicios, mantenimiento de instalaciones y cualquier otro trámite que precise su comunidad.",
     image: {
         src: styleGuideImage,
         alt: "Equipo de administradores de fincas revisando documentación y planificación de servicios"
@@ -77,12 +78,12 @@ const styleGuideSection = {
 const sideBySideStats = {
     eyebrow: "",
     title: "Experiencia y profesionalidad",
-    description: "Desde hace muchos años somos especialistas en gestión y administración de fincas, aportando confianza y tranquilidad. Somos un equipo, cada uno comprometido con la calidad y la transparencia.",
+    description: "Desde hace más de cuatro décadas somos especialistas en gestión y administración de fincas, aportando confianza y tranquilidad a las comunidades de propietarios de Torrejón de Ardoz y Madrid.",
     variant: 'side-by-side' as const,
     stats: statsLists.withContent.stats,
     content: {
-        title: "Experiencia y profesionalidad",
-        description: "Desde hace muchos años somos especialistas en gestión y administración de fincas, aportando confianza y tranquilidad. Somos un equipo, cada uno comprometido con la calidad y la transparencia.",
+        title: "Un equipo a su servicio",
+        description: "Cada miembro de nuestro equipo está comprometido con la calidad, la transparencia y una atención personalizada. Tratamos cada comunidad como si fuera nuestra.",
     }
 };
 
@@ -96,8 +97,8 @@ const faqsSection = {
 
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
     <Hero content={heroContent} />
-    <Features content={featuresSection} padding="base" background="dark" />
-    <SplitPanel content={styleGuideSection} imagePosition="right" background="dark" padding="base" />
-    <Stats content={sideBySideStats} background='dark' padding="base"/>
-    <Faqs content={faqsSection} background="dark" padding="base" />
+    <Features content={featuresSection} padding="base" background="base" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="base" />
+    <Stats content={sideBySideStats} background='base' padding="base"/>
+    <Faqs content={faqsSection} background="light" padding="base" />
 </Layout>
