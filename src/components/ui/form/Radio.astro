@@ -35,7 +35,7 @@ const bgClass = getBackgroundColor(background === 'dark' ? 'light' : 'base');
 <div class="form-group">
     <label class={`block text-sm font-medium mb-2 ${labelClass}`}>
         {label}
-        {required && <span class="text-red-500">*</span>}
+        {required && <span class="text-secondary">*</span>}
     </label>
     <div class="space-y-2">
         {options.map((option, index) => (

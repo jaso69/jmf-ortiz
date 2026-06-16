@@ -38,7 +38,7 @@ const inputTextClass = getInputTextColor(background);
         <>
             <label class={`block text-sm font-medium mb-2 ${labelClass}`}>
                 {label}
-                {required && <span class="text-red-500">*</span>}
+                {required && <span class="text-secondary">*</span>}
             </label>
             <div class="space-y-2">
                 {options.map((option, index) => (
@@ -90,7 +90,7 @@ const inputTextClass = getInputTextColor(background);
                 class={`text-sm font-medium ${inputTextClass}`}
             >
                 {label}
-                {required && <span class="text-red-500">*</span>}
+                {required && <span class="text-secondary">*</span>}
             </label>
         </div>
     )}

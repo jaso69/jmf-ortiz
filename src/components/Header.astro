@@ -3,6 +3,7 @@ import { headerMenu } from '@data/menu';
 import Logo from '@components/Logo.astro';
 import { Menu, X } from 'lucide-astro';
 import Button from '@components/ui/Button.astro';
+import ThemeSwitcher from '@components/ThemeSwitcher.astro';
 
 const ctaButton = {
     name: 'Contacto',
@@ -22,7 +23,7 @@ const isCurrentPage = (link: string) => {
 };
 ---
 
-<header class="fixed top-0 z-50 w-full left-0 bg-white shadow-sm border-b border-stone-200">
+<header class="fixed top-0 z-50 w-full left-0 bg-background shadow-sm border-b border-border">
     <div class="site-container mx-auto px-4">
         <div class="flex justify-between items-center py-4 px-2">
             <Logo />
@@ -54,6 +55,7 @@ const isCurrentPage = (link: string) => {
                 </ul>
 
                 <Button href={ctaButton.link} variant="primary">{ctaButton.name}</Button>
+                <ThemeSwitcher />
                 {/* Mobile Menu Button */}
                 <button
                     class="mobile-menu-button relative z-30 p-2 border-none cursor-pointer bg-transparent lg:hidden"
@@ -64,7 +66,7 @@ const isCurrentPage = (link: string) => {
                         <Menu size={24} class="text-body-base" />
                     </span>
                     <span class="close-icon hidden">
-                        <X size={24} class="text-white" />
+                        <X size={24} class="text-nav-mobile-text" />
                     </span>
                 </button>
 
@@ -76,7 +78,7 @@ const isCurrentPage = (link: string) => {
                         {
                             headerMenu.map((item) => (
                                 <li>
-                                    <div class="text-white">
+                                    <div>
                                         <div class="flex items-center justify-between">
                                             <a
                                                 href={item.link}
